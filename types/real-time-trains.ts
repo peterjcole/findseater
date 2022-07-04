@@ -15,15 +15,7 @@ export interface Location {
 }
 
 export interface Filter {
-  destination: Destination
-}
-
-export interface Destination {
-  name: string
-  crs: string
-  tiploc: Tiploc
-  country: string
-  system: string
+  destination: Location
 }
 
 export interface Service {
@@ -56,6 +48,7 @@ export interface LocationDetail {
   platform: string
   platformConfirmed: boolean
   platformChanged: boolean
+  serviceLocation?: string
   displayAs: string
 }
 

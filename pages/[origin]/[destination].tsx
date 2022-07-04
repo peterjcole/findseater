@@ -1,46 +1,46 @@
-import { useRouter } from 'next/router'
 import type { GetServerSideProps, NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next/types'
 import type { LocationLineUpResponse } from '../../types/real-time-trains'
-import type { AvailabilityResponse, TrainServices } from '../../types/southeastern'
+import type { AvailabilityResponse } from '../../types/southeastern'
 import { mockAvailability, mockLocationLineUp } from '../../fixtures'
-import * as fs from 'fs'
+import { tsidToUid, uidToTsid } from '../../utils'
+import type { Availability, Trains } from '../../types/trains'
 
-const Destination: NextPage<Props> = ({ availability }) => {
-  const router = useRouter()
-  const { origin, destination } = router.query
-  const originStation = availability[0].seatingAvailabilityAtLocations[0].stationName
-
+const Destination: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-3xl font-bold underline">Findseater</h1>
+      <p>
+        Upcoming trains from {origin.name} to {destination.name}:
+      </p>
       <table className="table-auto border-collapse w-full text-sm">
         <thead>
           <tr>
             <th className="border-b font-medium p-4 text-slate-800 text-left">Departure time</th>
             <th className="border-b font-medium p-4 text-slate-800 text-left">
-              Loading level at {originStation}
+              Loading level at {origin.name}
             </th>
             <th className="border-b font-medium p-4 text-slate-800 text-left">
-              Maximum loading level
+              Maximum loading level on journey
             </th>
           </tr>
         </thead>
         <tbody>
-          {availability.map((serviceAvailability) => {
-            return (
-              <tr key={serviceAvailability.tsid}>
-                <td className="border-b border-slate-100 p-4 text-slate-700">{'departuretime'}</td>
-                <td>{serviceAvailability.seatingAvailabilityAtLocations[0].averageLoading}</td>
-                <td>{'maxLoading'}</td>
-              </tr>
-            )
-          })}
+          {availability.map(
+            ({ departureTime, maxLoadingLevel, seatingAvailabilityAtLocations, tsid }) => {
+              return (
+                <tr key={tsid}>
+                  <td className="border-b border-slate-100 p-4 text-slate-700">
+                    {departureTime || 'Unknown'}
+                  </td>
+                  <td>{seatingAvailabilityAtLocations[0].averageLoading || 'Unknown'}</td>
+                  <td>{maxLoadingLevel || 'Unknown'}</td>
+                </tr>
+              )
+            }
+          )}
         </tbody>
       </table>
-      <p>Origin: {origin}</p>
-      <p>Destination: {destination}</p>
-      <p>trains: {JSON.stringify(availability)}</p>
     </div>
   )
 }
@@ -48,50 +48,69 @@ const Destination: NextPage<Props> = ({ availability }) => {
 export default Destination
 
 type Props = {
-  availability: AvailabilityResponse
-}
-
-const mapAvailability = (
-  availability: AvailabilityResponse,
-  mockLocationLineUp: LocationLineUpResponse
-) => {
-  // TODO
-  // add departure time (of each station)?
-  // add max loading level_`
-  // change location of mocks and strip from git and make public
-  // fixtures probably needs to move
-}
-
-export const getServerSidePropsActual: GetServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  const { origin, destination } = context.query
-  const trains = await getRealtimeTrains(origin, destination)
-
-  const serviceCodes = trains.services.map((service) =>
-    formatServiceCode(service.serviceUid, service.runDate)
-  )
-  const availability = await getAvailability(serviceCodes)
-
-  return {
-    props: { availability: trimAvailability(availability, origin as string) }, // will be passed to the page component as props
-  }
+  trains: Trains
 }
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const { origin, destination } = context.query
+  const locationLineUp = await getRealtimeTrains(origin, destination)
 
-  const availability = trimAvailability(mockAvailability, origin as string)
-
-  // const mappedAvailability = mapAvailability(availability, mockLocationLineUp)
+  const availability = await getAvailability(locationLineUp)
 
   return {
     props: {
-      availability,
+      trains: {
+        availability: mapAvailability(
+          trimAvailability(availability, origin as string),
+          locationLineUp
+        ),
+        origin: locationLineUp.location,
+        destination: locationLineUp.filter.destination,
+      },
+    }, // will be passed to the page component as props
+  }
+}
+
+export const getServerSidePropsMocked: GetServerSideProps = async (): Promise<{
+  props: { trains: Trains }
+}> => {
+  const availability = trimAvailability(mockAvailability, 'AFK')
+
+  const mappedAvailability = mapAvailability(availability, mockLocationLineUp)
+
+  return {
+    props: {
+      trains: {
+        availability: mappedAvailability,
+        origin: mockLocationLineUp.location,
+        destination: mockLocationLineUp.filter.destination,
+      },
     },
   }
+}
+
+const mapAvailability = (
+  availability: AvailabilityResponse,
+  locationLineUp: LocationLineUpResponse
+): Availability => {
+  return availability.map((service) => {
+    const matchedRttService = locationLineUp.services.find(
+      (rttService) => rttService.serviceUid === tsidToUid(service.tsid)
+    )
+
+    const loadingLevels = service.seatingAvailabilityAtLocations.flatMap((location) =>
+      location.averageLoading ? location.averageLoading : []
+    )
+
+    return {
+      ...service,
+      maxLoadingLevel: loadingLevels?.length ? Math.max(...loadingLevels) : null,
+      departureTime: matchedRttService?.locationDetail?.gbttBookedDeparture,
+      fullServiceDetails: matchedRttService,
+    }
+  })
 }
 
 async function getRealtimeTrains(
@@ -112,7 +131,11 @@ async function getRealtimeTrains(
   return trains
 }
 
-async function getAvailability(serviceCodes: string[]) {
+async function getAvailability(locationLineUp: LocationLineUpResponse) {
+  const serviceCodes = locationLineUp.services.map((service) =>
+    uidToTsid(service.serviceUid, service.runDate)
+  )
+
   const southeasternRes = await fetch(
     'https://api.southeasternrailway.co.uk/departure-boards/service-seating-availability',
     {
@@ -144,12 +167,4 @@ const trimAvailability = (
       seatingAvailabilityAtLocations: trimmedLocations,
     }
   })
-}
-
-const formatServiceCode = (serviceUid: string, runDate: string) => {
-  const numericalDate = runDate.replace(/-/g, '')
-
-  const numericalUid = `${serviceUid.slice(0, 1).charCodeAt(0)}${serviceUid.slice(1)}`
-
-  return `${numericalDate}${numericalUid}`
 }
