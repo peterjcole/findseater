@@ -8,33 +8,105 @@ import type { Availability, Trains } from '../../types/trains'
 
 const Destination: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Findseater</h1>
-      <p>
-        Upcoming trains from {origin.name} to {destination.name}:
-      </p>
-      <table className="table-auto border-collapse w-full text-sm">
+    <div className="max-w-2xl mx-auto p-4 pt-10">
+      <div className="p-4">
+        <h1 className="text-3xl font-bold mb-2">Findseater</h1>
+        <p className="mb-4">
+          Upcoming trains from {origin.name} to {destination.name}:
+        </p>
+      </div>
+      <table className="table-auto border-collapse w-full text-sm rounded-md shadow-lg">
         <thead>
           <tr>
-            <th className="border-b font-medium p-4 text-slate-800 text-left">Departure time</th>
+            <th className="border-b font-medium p-4 text-slate-800 text-left">Departure</th>
             <th className="border-b font-medium p-4 text-slate-800 text-left">
               Loading level at {origin.name}
             </th>
             <th className="border-b font-medium p-4 text-slate-800 text-left">
-              Maximum loading level on journey
+              Worst loading level on journey
             </th>
           </tr>
         </thead>
         <tbody>
           {availability.map(
-            ({ departureTime, maxLoadingLevel, seatingAvailabilityAtLocations, tsid }) => {
+            (
+              {
+                bookedDepartureTime,
+                realTimeDepartureTime,
+                maxLoadingLevel,
+                seatingAvailabilityAtLocations,
+                tsid,
+                platform,
+              },
+              index
+            ) => {
+              const className = `p-4 text-slate-700${
+                index < availability.length - 1 ? ' border-b border-slate-100' : ''
+              }`
+
+              const getColourClass = (loadingLevel: number | null | undefined) => {
+                if (!loadingLevel) {
+                  return ''
+                }
+
+                if (loadingLevel < 40) {
+                  return 'bg-green-100'
+                }
+
+                if (loadingLevel < 50) {
+                  return 'bg-lime-100'
+                }
+
+                if (loadingLevel < 60) {
+                  return 'bg-amber-100'
+                }
+
+                if (loadingLevel < 90) {
+                  return 'bg-amber-100'
+                }
+
+                return 'bg-red-100'
+              }
+
+              const currentStationLoading = seatingAvailabilityAtLocations[0].averageLoading
+
+              const formatDepartureTime = (time: string | any[] | undefined) =>
+                `${time?.slice(0, 2)}:${time?.slice(2, 4)}`
+
+              const bookedEqualsReal = bookedDepartureTime === realTimeDepartureTime
+
+              const formattedBookedTime = formatDepartureTime(bookedDepartureTime)
+              const formattedRealTime = formatDepartureTime(realTimeDepartureTime)
+
               return (
                 <tr key={tsid}>
-                  <td className="border-b border-slate-100 p-4 text-slate-700">
-                    {departureTime || 'Unknown'}
+                  <td {...{ className }}>
+                    <p className="mb-1">
+                      {bookedDepartureTime && (
+                        <span
+                          className={
+                            !bookedEqualsReal ? 'line-through font-light text-xs mr-1' : ''
+                          }
+                        >
+                          <time dateTime={formattedBookedTime}>{formattedBookedTime}</time>
+                        </span>
+                      )}{' '}
+                      {!bookedEqualsReal && formattedRealTime && (
+                        <span className="font-bold">
+                          <time dateTime={formattedRealTime}>{formattedRealTime}</time>
+                        </span>
+                      )}
+                    </p>
+
+                    {!bookedDepartureTime && <p>Unknown</p>}
+                    {platform && <p className="text-xs font-light">Platform {platform}</p>}
                   </td>
-                  <td>{seatingAvailabilityAtLocations[0].averageLoading || 'Unknown'}</td>
-                  <td>{maxLoadingLevel || 'Unknown'}</td>
+                  <td className={`${className} ${getColourClass(currentStationLoading)}`}>
+                    {currentStationLoading ? `${currentStationLoading}%` : 'Unknown'}
+                  </td>
+                  <td className={`${className} ${getColourClass(maxLoadingLevel)}`}>
+                    {maxLoadingLevel ? `${maxLoadingLevel}%` : 'Unknown'}
+                  </td>
                 </tr>
               )
             }
@@ -107,7 +179,9 @@ const mapAvailability = (
     return {
       ...service,
       maxLoadingLevel: loadingLevels?.length ? Math.max(...loadingLevels) : null,
-      departureTime: matchedRttService?.locationDetail?.gbttBookedDeparture,
+      bookedDepartureTime: matchedRttService?.locationDetail?.gbttBookedDeparture,
+      realTimeDepartureTime: matchedRttService?.locationDetail?.realtimeDeparture,
+      platform: matchedRttService?.locationDetail?.platform,
       fullServiceDetails: matchedRttService,
     }
   })

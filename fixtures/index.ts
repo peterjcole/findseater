@@ -78,7 +78,7 @@ export const mockAvailability: AvailabilityResponse = [
       {
         stationName: 'Dover Priory',
         stationCRS: 'DVP',
-        averageLoading: 16,
+        averageLoading: 52,
       },
       {
         stationName: 'Folkestone Central',
@@ -103,7 +103,7 @@ export const mockAvailability: AvailabilityResponse = [
       {
         stationName: 'Stratford International',
         stationCRS: 'SFA',
-        averageLoading: 21,
+        averageLoading: 52,
       },
       {
         stationName: 'London St Pancras (Intl)',
@@ -148,7 +148,7 @@ export const mockAvailability: AvailabilityResponse = [
       {
         stationName: 'Stratford International',
         stationCRS: 'SFA',
-        averageLoading: 39,
+        averageLoading: 90,
       },
       {
         stationName: 'London St Pancras (Intl)',
@@ -440,7 +440,7 @@ export const mockLocationLineUp: LocationLineUpResponse = {
         isPublicCall: true,
         realtimeArrival: '1342',
         realtimeArrivalActual: true,
-        realtimeDeparture: '1343',
+        realtimeDeparture: '1350',
         realtimeDepartureActual: false,
         platform: '5',
         platformConfirmed: true,

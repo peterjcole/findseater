@@ -11,6 +11,8 @@ export type Availability = TrainService[]
 
 export interface TrainService extends AvailabilityForService {
   maxLoadingLevel: number | null
-  departureTime?: LocationDetail['gbttBookedDeparture']
+  bookedDepartureTime?: LocationDetail['gbttBookedDeparture']
+  realTimeDepartureTime?: LocationDetail['realtimeDeparture']
+  platform?: LocationDetail['platform']
   fullServiceDetails?: Service
 }
