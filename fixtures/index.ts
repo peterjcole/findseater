@@ -41,6 +41,31 @@ export const mockAvailability: AvailabilityResponse = [
         averageLoading: 36,
       },
       {
+        stationName: 'Stratford International',
+        stationCRS: 'SFA',
+        averageLoading: 36,
+      },
+      {
+        stationName: 'Stratford International',
+        stationCRS: 'SFA',
+        averageLoading: 36,
+      },
+      {
+        stationName: 'Stratford International',
+        stationCRS: 'SFA',
+        averageLoading: 36,
+      },
+      {
+        stationName: 'Stratford International',
+        stationCRS: 'SFA',
+        averageLoading: 36,
+      },
+      {
+        stationName: 'Stratford International',
+        stationCRS: 'SFA',
+        averageLoading: 36,
+      },
+      {
         stationName: 'London St Pancras (Intl)',
         stationCRS: 'STP',
         averageLoading: 0,

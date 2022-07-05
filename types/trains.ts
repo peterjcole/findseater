@@ -1,5 +1,5 @@
-import type { AvailabilityForService } from './southeastern'
-import type { LocationDetail, Service, Location } from './real-time-trains'
+import type { SeatingAvailability } from './southeastern'
+import type { Location, LocationDetail, Service } from './real-time-trains'
 
 export interface Trains {
   availability: Availability
@@ -9,10 +9,20 @@ export interface Trains {
 
 export type Availability = TrainService[]
 
-export interface TrainService extends AvailabilityForService {
-  maxLoadingLevel: number | null
-  bookedDepartureTime?: LocationDetail['gbttBookedDeparture']
-  realTimeDepartureTime?: LocationDetail['realtimeDeparture']
-  platform?: LocationDetail['platform']
+export interface Time {
+  booked?: string | null
+  realTime?: string | null
+}
+
+export interface Seating extends SeatingAvailability {
+  isMaxLoading: boolean
+}
+
+export interface TrainService {
+  tsid: string
+  seating: Seating[]
+  departureTime: Time
+  arrivalTime: Time
+  departurePlatform?: LocationDetail['platform']
   fullServiceDetails?: Service
 }
