@@ -17,7 +17,7 @@ const Destination: NextPage<Props> = ({ trains: { availability, origin, destinat
           Upcoming trains from {origin.name} to {destination.name}:
         </p>
       </div>
-      <table className="table-fixed border-collapse text-sm rounded-md shadow-lg">
+      <table className="table-fixed w-full sm:w-auto border-collapse text-sm rounded-md shadow-lg">
         <thead>
           <tr>
             <th className="border-b font-medium p-4 text-slate-800 text-left w-24">Departure</th>
