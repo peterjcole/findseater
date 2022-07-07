@@ -40,7 +40,7 @@ const Destination: NextPage<Props> = ({ trains: { availability, origin, destinat
                 <td {...{ className }}>
                   <ServiceInfo time={departureTime} platform={departurePlatform} />
                 </td>
-                <td className={`${className} overflow-x-scroll`}>
+                <td className={`${className} overflow-x-auto`}>
                   <Loading service={service} />
                 </td>
                 <td {...{ className }}>
