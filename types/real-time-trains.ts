@@ -50,6 +50,7 @@ export interface LocationDetail {
   platformChanged: boolean
   serviceLocation?: string
   displayAs: string
+  associations?: Association[]
 }
 
 export interface Origin {
@@ -64,4 +65,10 @@ export interface LocationDetailDestination {
   description: string
   workingTime: string
   publicTime: string
+}
+
+export interface Association {
+  type: string
+  associatedUid: string
+  associatedRunDate: string
 }

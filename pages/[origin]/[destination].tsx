@@ -11,13 +11,13 @@ import { Loading } from '../../components/Loading'
 const Destination: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
   return (
     <div className="max-w-3xl mx-auto p-4 pt-10">
-      <div className="p-4">
+      <div className="py-4">
         <h1 className="text-3xl font-bold mb-2">Findseater</h1>
         <p className="mb-4">
           Upcoming trains from {origin.name} to {destination.name}:
         </p>
       </div>
-      <table className="table-fixed border-collapse w-full text-sm rounded-md shadow-lg">
+      <table className="table-fixed border-collapse text-sm rounded-md shadow-lg">
         <thead>
           <tr>
             <th className="border-b font-medium p-4 text-slate-800 text-left w-24">Departure</th>
@@ -73,7 +73,7 @@ export const getServerSideProps: GetServerSideProps = async (
     props: {
       trains: {
         availability: mapAvailability(
-          trimAvailability(availability, origin as string),
+          trimAvailability(availability, origin as string, destination as string),
           locationLineUp
         ),
         origin: locationLineUp.location,
@@ -86,7 +86,7 @@ export const getServerSideProps: GetServerSideProps = async (
 export const getServerSidePropsMocked: GetServerSideProps = async (): Promise<{
   props: { trains: Trains }
 }> => {
-  const availability = trimAvailability(mockAvailability, 'AFK')
+  const availability = trimAvailability(mockAvailability, 'STP', 'AFK')
 
   const mappedAvailability = mapAvailability(availability, mockLocationLineUp)
 
@@ -125,6 +125,10 @@ const mapAvailability = (
       (rttService) => rttService.serviceUid === tsidToUid(service.tsid)
     )
 
+    const endsAtDestination =
+      matchedRttService?.locationDetail.destination[0].tiploc ===
+      locationLineUp.filter.destination.tiploc
+
     return {
       tsid: service.tsid,
       seating: mapSeatingAvailability(service.seatingAvailabilityAtLocations),
@@ -133,7 +137,10 @@ const mapAvailability = (
         realTime: formatTime(matchedRttService?.locationDetail?.realtimeDeparture) || null,
       },
       arrivalTime: {
-        booked: formatTime(matchedRttService?.locationDetail?.destination[0].publicTime) || null,
+        booked:
+          (endsAtDestination &&
+            formatTime(matchedRttService?.locationDetail?.destination[0].publicTime)) ||
+          null,
       },
       departurePlatform: matchedRttService?.locationDetail?.platform,
       fullServiceDetails: matchedRttService,
@@ -157,6 +164,8 @@ async function getRealtimeTrains(
 
   const trains: LocationLineUpResponse = await realtimeTrainsRes.json()
 
+  // fs.writeFileSync('trains.json', JSON.stringify(trains))
+
   return trains
 }
 
@@ -177,18 +186,23 @@ async function getAvailability(locationLineUp: LocationLineUpResponse) {
   )
 
   const availability: AvailabilityResponse = await southeasternRes.json()
+
+  // fs.writeFileSync('availability.json', JSON.stringify(availability))
+
   return availability
 }
 
 const trimAvailability = (
   availability: AvailabilityResponse,
-  origin: string | null | undefined
+  origin: string | null | undefined,
+  destination: string | null | undefined
 ) => {
   return availability.map((serviceAvailability) => {
     const { seatingAvailabilityAtLocations: locations } = serviceAvailability
 
     const trimmedLocations = locations.slice(
-      locations.findIndex((location) => location.stationCRS === origin)
+      locations.findIndex((location) => location.stationCRS === origin),
+      locations.findIndex((location) => location.stationCRS === destination) + 1
     )
 
     trimmedLocations[trimmedLocations.length - 1].averageLoading =
