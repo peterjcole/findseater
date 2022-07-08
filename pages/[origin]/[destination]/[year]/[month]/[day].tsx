@@ -5,13 +5,22 @@ import { getData } from '../../../../../shared/data'
 import { TrainTable } from '../../../../../components/TrainTable'
 import { mapTrains } from '../../../../../shared/mappers'
 import { IntroText } from '../../../../../components/introText'
+import { useRouter } from 'next/router'
 
 const Day: NextPage<Props> = ({ trains: { availability, origin, destination, formattedDate } }) => {
+  const router = useRouter()
+  const swappedUrl = `/${router.query.destination}/${router.query.origin}/${router.query.year}/${router.query.month}/${router.query.day}`
+
   return (
     <div className="max-w-3xl mx-auto p-4 pt-10">
       <div className="py-4">
-        <h1 className="text-3xl font-bold mb-2">Findseater</h1>
-        <IntroText origin={origin.name} destination={destination.name} date={formattedDate} />
+        <h1 className="text-3xl font-bold mb-4">Findseater</h1>
+        <IntroText
+          origin={origin.name}
+          destination={destination.name}
+          date={formattedDate}
+          swappedUrl={swappedUrl}
+        />
       </div>
       <TrainTable availability={availability} />
     </div>
