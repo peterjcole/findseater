@@ -1,10 +1,17 @@
 import type { FunctionComponent } from 'react'
 import type { TrainService } from '../types/trains'
-import { getBgColourClass, getTextColourClass } from '../utils'
+import { getBgColourClass, getTextColourClass } from '../shared/formatting'
 
-export const Loading: FunctionComponent<Props> = ({ service: { seating } }) => {
-  return (
-    <figure>
+export const Loading: FunctionComponent<Props> = ({ service: { seating }, maxLoadingLevel }) => {
+  const originLoadingLevel = seating?.[0]?.averageLoading
+
+  const ariaLabel =
+    maxLoadingLevel && originLoadingLevel
+      ? `Origin station loading level: ${originLoadingLevel}%. Maximum loading level: ${maxLoadingLevel}%`
+      : 'Loading levels unknown'
+
+  return seating?.length ? (
+    <figure aria-label={ariaLabel}>
       <ol className="inline-flex gap-1 rounded-md min-h-[2.25rem]">
         {seating.map(({ averageLoading, stationCRS, isMaxLoading }, index) => {
           return averageLoading && (isMaxLoading || index === 0) ? (
@@ -28,6 +35,7 @@ export const Loading: FunctionComponent<Props> = ({ service: { seating } }) => {
               className={`${getBgColourClass(
                 averageLoading
               )} flex items-center justify-center shadow`}
+              key={stationCRS}
             >
               <p className="rotate-90 text-xs">{stationCRS}</p>
             </li>
@@ -35,9 +43,12 @@ export const Loading: FunctionComponent<Props> = ({ service: { seating } }) => {
         })}
       </ol>
     </figure>
+  ) : (
+    <p>Unknown</p>
   )
 }
 
 interface Props {
   service: TrainService
+  maxLoadingLevel?: number | null
 }

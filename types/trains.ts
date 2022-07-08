@@ -20,6 +20,9 @@ export interface Seating extends SeatingAvailability {
 
 export interface TrainService {
   tsid: string
+  uid?: string
+  runDate?: string
+  maxLoadingLevel?: number | null
   seating: Seating[]
   departureTime: Time
   arrivalTime: Time
