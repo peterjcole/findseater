@@ -1,12 +1,12 @@
 export interface LocationLineUpResponse {
-  location: Location
+  location: LocationLineUpLocation
   filter: Filter
   services: Service[]
 }
 
 export type Tiploc = string[] | string
 
-export interface Location {
+export interface LocationLineUpLocation {
   name: string
   crs: string
   tiploc: Tiploc
@@ -15,7 +15,7 @@ export interface Location {
 }
 
 export interface Filter {
-  destination: Location
+  destination: LocationLineUpLocation
 }
 
 export interface Service {
@@ -37,8 +37,8 @@ export interface LocationDetail {
   description: string
   gbttBookedArrival?: string
   gbttBookedDeparture: string
-  origin: Origin[]
-  destination: LocationDetailDestination[]
+  origin: Station[]
+  destination: Station[]
   isCall: boolean
   isPublicCall: boolean
   realtimeArrival?: string
@@ -53,14 +53,7 @@ export interface LocationDetail {
   associations?: Association[]
 }
 
-export interface Origin {
-  tiploc: Tiploc
-  description: string
-  workingTime: string
-  publicTime: string
-}
-
-export interface LocationDetailDestination {
+export interface Station {
   tiploc: Tiploc
   description: string
   workingTime: string
@@ -71,4 +64,47 @@ export interface Association {
   type: string
   associatedUid: string
   associatedRunDate: string
+}
+
+export interface ServiceInfoResponse {
+  serviceUid: string
+  runDate: string
+  serviceType: string
+  isPassenger: boolean
+  trainIdentity: string
+  powerType: string
+  trainClass: string
+  atocCode: string
+  atocName: string
+  performanceMonitored: boolean
+  origin: Station[]
+  destination: Station[]
+  locations: ServiceInfoLocation[]
+  realtimeActivated: boolean
+  runningIdentity: string
+}
+
+export interface ServiceInfoLocation {
+  realtimeActivated: boolean
+  tiploc: string
+  crs: string
+  description: string
+  gbttBookedDeparture?: string
+  origin: Station[]
+  destination: Station[]
+  isCall: boolean
+  isPublicCall: boolean
+  realtimeDeparture?: string
+  realtimeDepartureActual?: boolean
+  platform?: string
+  platformConfirmed?: boolean
+  platformChanged?: boolean
+  line?: string
+  lineConfirmed?: boolean
+  displayAs: string
+  associations?: Association[]
+  gbttBookedArrival?: string
+  realtimeArrival?: string
+  realtimeArrivalActual?: boolean
+  serviceLocation?: string
 }

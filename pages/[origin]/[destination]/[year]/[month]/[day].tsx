@@ -4,15 +4,14 @@ import type { Trains } from '../../../../../types/trains'
 import { getData } from '../../../../../shared/data'
 import { TrainTable } from '../../../../../components/TrainTable'
 import { mapTrains } from '../../../../../shared/mappers'
+import { IntroText } from '../../../../../components/introText'
 
 const Day: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
   return (
     <div className="max-w-3xl mx-auto p-4 pt-10">
       <div className="py-4">
         <h1 className="text-3xl font-bold mb-2">Findseater</h1>
-        <p className="mb-4">
-          Upcoming trains from {origin.name} to {destination.name}:
-        </p>
+        <IntroText origin={origin.name} destination={destination.name} />
       </div>
       <TrainTable availability={availability} />
     </div>
@@ -36,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (
     day: string
   }
 
-  const { locationLineUp, availability } = await getData({
+  const { locationLineUp, availability, serviceInfo } = await getData({
     origin: origin,
     destination: destination,
     year: year,
@@ -46,7 +45,13 @@ export const getServerSideProps: GetServerSideProps = async (
 
   return {
     props: {
-      trains: mapTrains(availability, origin, destination, locationLineUp),
+      trains: mapTrains({
+        availability,
+        origin,
+        destination,
+        locationLineUp,
+        serviceInfo,
+      }),
     },
   }
 }

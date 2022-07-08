@@ -1,10 +1,10 @@
 import type { SeatingAvailability } from './southeastern'
-import type { Location, LocationDetail, Service } from './real-time-trains'
+import type { LocationDetail, LocationLineUpLocation } from './real-time-trains'
 
 export interface Trains {
   availability: Availability
-  origin: Location
-  destination: Location
+  origin: LocationLineUpLocation
+  destination: LocationLineUpLocation
 }
 
 export type Availability = TrainService[]
@@ -26,6 +26,5 @@ export interface TrainService {
   seating: Seating[]
   departureTime: Time
   arrivalTime: Time
-  departurePlatform?: LocationDetail['platform']
-  fullServiceDetails?: Service
+  departurePlatform?: LocationDetail['platform'] | null
 }

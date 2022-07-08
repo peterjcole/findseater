@@ -1,15 +1,16 @@
-import type { LocationLineUpResponse } from '../types/real-time-trains'
+import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
 import type { AvailabilityResponse } from '../types/southeastern'
 import { uidToTsid } from './formatting'
+
 // import * as fs from 'fs'
 
-export async function getRealtimeTrains({
+export async function getLocationLineUp({
   origin,
   destination,
   year,
   month,
   day,
-}: GetRealtimeTrainsProps) {
+}: GetLocationLineUpProps) {
   const hasFullDate = year && month && day
 
   const realtimeTrainsRes = await fetch(
@@ -31,12 +32,47 @@ export async function getRealtimeTrains({
   return trains
 }
 
-interface GetRealtimeTrainsProps {
+interface GetLocationLineUpProps {
   origin?: string
   destination?: string
   year?: string
   month?: string
   day?: string
+}
+
+export const getServiceInfo = async ({ serviceUid, year, month, day }: GetServiceInfoProps) => {
+  const realtimeTrainsRes = await fetch(
+    `http://api.rtt.io/api/v1/json/service/${serviceUid}/${year}/${month}/${day}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Basic ${process.env.RTT_AUTH_KEY}`,
+      },
+    }
+  )
+
+  const trains: ServiceInfoResponse = await realtimeTrainsRes.json()
+
+  return trains
+}
+
+interface GetServiceInfoProps {
+  serviceUid: string
+  year: string
+  month: string
+  day: string
+}
+
+export const getAllServiceInfo = async (
+  locationLineUp: LocationLineUpResponse
+): Promise<ServiceInfoResponse[]> => {
+  return Promise.all(
+    locationLineUp.services.map(async ({ serviceUid, runDate }) => {
+      const [year, month, day] = runDate.split('-')
+
+      return getServiceInfo({ serviceUid, year, month, day })
+    })
+  )
 }
 
 export async function getAvailability(locationLineUp: LocationLineUpResponse) {
@@ -64,15 +100,22 @@ export async function getAvailability(locationLineUp: LocationLineUpResponse) {
 }
 
 export const getData = async ({ origin, destination, year, month, day }: getDataProps) => {
-  const locationLineUp = await getRealtimeTrains({
+  const locationLineUp = await getLocationLineUp({
     origin: origin,
     destination: destination,
     year: year,
     month: month,
     day: day,
   })
-  const availability = await getAvailability(locationLineUp)
-  return { locationLineUp, availability }
+
+  const [serviceInfo, availability] = await Promise.all([
+    getAllServiceInfo(locationLineUp),
+    getAvailability(locationLineUp),
+  ])
+
+  // fs.writeFileSync('serviceinfo.json', JSON.stringify(serviceInfo))
+
+  return { locationLineUp, availability, serviceInfo }
 }
 
 interface getDataProps {

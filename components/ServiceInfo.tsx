@@ -42,7 +42,7 @@ export const ServiceInfo: FunctionComponent<Props> = ({
 
 interface Props {
   time: Time
-  platform?: string
+  platform?: string | null
   uid?: string
   runDate?: string
 }

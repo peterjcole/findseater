@@ -64,3 +64,6 @@ export const getTextColourClass = (loadingLevel: number | null | undefined) => {
 
   return `text-red-800`
 }
+
+export const caseInsensitiveEquals = (first: string, second: string) =>
+  first.localeCompare(second, undefined, { sensitivity: 'base' }) === 0

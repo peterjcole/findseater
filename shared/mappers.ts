@@ -3,9 +3,11 @@ import type {
   AvailabilityResponse,
   SeatingAvailability,
 } from '../types/southeastern'
-import type { LocationLineUpResponse } from '../types/real-time-trains'
+import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
 import type { Availability, Seating } from '../types/trains'
-import { formatTime, tsidToUid } from './formatting'
+import { caseInsensitiveEquals, formatTime, tsidToUid } from './formatting'
+import parse from 'date-fns/parse'
+import compareAsc from 'date-fns/compareAsc'
 
 const mapSeatingAvailability = (
   seatingAvailability: SeatingAvailability[],
@@ -31,44 +33,73 @@ function getLoadingLevels(service: AvailabilityForService) {
 
 export const mapAvailability = (
   availability: AvailabilityResponse,
-  locationLineUp: LocationLineUpResponse
+  serviceInfo: ServiceInfoResponse[],
+  origin: string,
+  destination: string
 ): Availability => {
-  return availability.map((service) => {
-    const matchedRttService = locationLineUp.services.find(
-      (rttService) => rttService.serviceUid === tsidToUid(service.tsid)
-    )
+  return availability
+    .map((service) => {
+      const matchedRttService = serviceInfo.find(
+        (rttService) => rttService.serviceUid === tsidToUid(service.tsid)
+      )
 
-    const endsAtDestination =
-      matchedRttService?.locationDetail.destination[0].tiploc ===
-      locationLineUp.filter.destination.tiploc
+      const userOrigin = matchedRttService?.locations.find((location) =>
+        caseInsensitiveEquals(location.crs, origin)
+      )
 
-    const { loadingLevels, maxLoadingLevel } = getLoadingLevels(service)
+      const userDestination = matchedRttService?.locations.find((location) =>
+        caseInsensitiveEquals(location.crs, destination)
+      )
 
-    return {
-      tsid: service.tsid,
-      uid: matchedRttService?.serviceUid,
-      runDate: matchedRttService?.runDate,
-      maxLoadingLevel,
-      seating: mapSeatingAvailability(
-        service.seatingAvailabilityAtLocations,
-        loadingLevels,
-        maxLoadingLevel
-      ),
-      departureTime: {
-        booked: formatTime(matchedRttService?.locationDetail?.gbttBookedDeparture) || null,
-        realTime: formatTime(matchedRttService?.locationDetail?.realtimeDeparture) || null,
-      },
-      arrivalTime: {
-        booked:
-          (endsAtDestination &&
-            formatTime(matchedRttService?.locationDetail?.destination[0].publicTime)) ||
-          null,
-      },
-      departurePlatform: matchedRttService?.locationDetail?.platform,
-      fullServiceDetails: matchedRttService,
-    }
-  })
+      const { loadingLevels, maxLoadingLevel } = getLoadingLevels(service)
+
+      return {
+        tsid: service.tsid,
+        uid: matchedRttService?.serviceUid,
+        runDate: matchedRttService?.runDate,
+        maxLoadingLevel,
+        seating: mapSeatingAvailability(
+          service.seatingAvailabilityAtLocations,
+          loadingLevels,
+          maxLoadingLevel
+        ),
+        departureTime: {
+          booked: formatTime(userOrigin?.gbttBookedDeparture) || null,
+          realTime: formatTime(userOrigin?.realtimeDeparture) || null,
+        },
+        arrivalTime: {
+          booked: formatTime(userDestination?.gbttBookedArrival) || null,
+          realTime: formatTime(userDestination?.realtimeArrival) || null,
+        },
+        departurePlatform: userOrigin?.platform || null,
+      }
+    })
+    .sort((first, second) => {
+      const firstArrival = first.arrivalTime.realTime || first.arrivalTime.booked
+      const secondArrival = second.arrivalTime.realTime || second.arrivalTime.booked
+
+      if (!firstArrival || !secondArrival) {
+        return 0
+      }
+
+      console.log(firstArrival)
+
+      console.log(parse(firstArrival, 'HH:mm', new Date()))
+
+      console.log(
+        compareAsc(
+          parse(firstArrival, 'HH:mm', new Date()),
+          parse(secondArrival, 'HH:mm', new Date())
+        )
+      )
+
+      return compareAsc(
+        parse(firstArrival, 'HH:mm', new Date()),
+        parse(secondArrival, 'HH:mm', new Date())
+      )
+    })
 }
+
 export const trimAvailability = (
   availability: AvailabilityResponse,
   origin: string,
@@ -78,14 +109,8 @@ export const trimAvailability = (
     const { seatingAvailabilityAtLocations: locations } = serviceAvailability
 
     const trimmedLocations = locations.slice(
-      locations.findIndex(
-        (location) =>
-          location.stationCRS.localeCompare(origin, undefined, { sensitivity: 'base' }) === 0
-      ),
-      locations.findIndex(
-        (location) =>
-          location.stationCRS.localeCompare(destination, undefined, { sensitivity: 'base' }) === 0
-      ) + 1
+      locations.findIndex((location) => caseInsensitiveEquals(location.stationCRS, origin)),
+      locations.findIndex((location) => caseInsensitiveEquals(location.stationCRS, destination)) + 1
     )
 
     const numStationsVisited = trimmedLocations?.length
@@ -101,16 +126,28 @@ export const trimAvailability = (
     }
   })
 }
-export const mapTrains = (
-  availability: AvailabilityForService[],
-  origin: string,
-  destination: string,
-  locationLineUp: LocationLineUpResponse
-) => ({
+
+export const mapTrains = ({
+  availability,
+  origin,
+  destination,
+  locationLineUp,
+  serviceInfo,
+}: MapTrainsParams) => ({
   availability: mapAvailability(
     trimAvailability(availability, origin as string, destination as string),
-    locationLineUp
+    serviceInfo,
+    origin,
+    destination
   ),
   origin: locationLineUp.location,
   destination: locationLineUp.filter.destination,
 })
+
+interface MapTrainsParams {
+  availability: AvailabilityForService[]
+  origin: string
+  destination: string
+  locationLineUp: LocationLineUpResponse
+  serviceInfo: ServiceInfoResponse[]
+}
