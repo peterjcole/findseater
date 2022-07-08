@@ -4,10 +4,11 @@ import type {
   SeatingAvailability,
 } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
-import type { Availability, Seating } from '../types/trains'
-import { caseInsensitiveEquals, formatTime, tsidToUid } from './formatting'
+import type { Availability, Seating, Trains } from '../types/trains'
+import { caseInsensitiveEquals, formatRequestedDate, formatTime, tsidToUid } from './formatting'
 import parse from 'date-fns/parse'
 import compareAsc from 'date-fns/compareAsc'
+import type { DateObj } from '../types/internal'
 
 const mapSeatingAvailability = (
   seatingAvailability: SeatingAvailability[],
@@ -22,7 +23,7 @@ const mapSeatingAvailability = (
   }))
 }
 
-function getLoadingLevels(service: AvailabilityForService) {
+const getLoadingLevels = (service: AvailabilityForService) => {
   const loadingLevels = service.seatingAvailabilityAtLocations.flatMap((location) =>
     location.averageLoading ? location.averageLoading : []
   )
@@ -82,17 +83,6 @@ export const mapAvailability = (
         return 0
       }
 
-      console.log(firstArrival)
-
-      console.log(parse(firstArrival, 'HH:mm', new Date()))
-
-      console.log(
-        compareAsc(
-          parse(firstArrival, 'HH:mm', new Date()),
-          parse(secondArrival, 'HH:mm', new Date())
-        )
-      )
-
       return compareAsc(
         parse(firstArrival, 'HH:mm', new Date()),
         parse(secondArrival, 'HH:mm', new Date())
@@ -133,7 +123,8 @@ export const mapTrains = ({
   destination,
   locationLineUp,
   serviceInfo,
-}: MapTrainsParams) => ({
+  date,
+}: MapTrainsParams): Trains => ({
   availability: mapAvailability(
     trimAvailability(availability, origin as string, destination as string),
     serviceInfo,
@@ -142,6 +133,7 @@ export const mapTrains = ({
   ),
   origin: locationLineUp.location,
   destination: locationLineUp.filter.destination,
+  formattedDate: formatRequestedDate(date),
 })
 
 interface MapTrainsParams {
@@ -150,4 +142,5 @@ interface MapTrainsParams {
   destination: string
   locationLineUp: LocationLineUpResponse
   serviceInfo: ServiceInfoResponse[]
+  date?: DateObj
 }

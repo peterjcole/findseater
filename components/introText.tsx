@@ -1,5 +1,13 @@
-export const IntroText = ({ origin, destination }: { origin: string; destination: string }) => (
+export const IntroText = ({
+  origin,
+  destination,
+  date,
+}: {
+  origin: string
+  destination: string
+  date: string
+}) => (
   <p className="mb-4">
-    Upcoming trains from {origin} to {destination}, sorted by arrival time:
+    Upcoming trains from {origin} to {destination}, on {date}, sorted by arrival time:
   </p>
 )

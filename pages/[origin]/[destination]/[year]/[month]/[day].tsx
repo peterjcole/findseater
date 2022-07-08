@@ -6,12 +6,12 @@ import { TrainTable } from '../../../../../components/TrainTable'
 import { mapTrains } from '../../../../../shared/mappers'
 import { IntroText } from '../../../../../components/introText'
 
-const Day: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
+const Day: NextPage<Props> = ({ trains: { availability, origin, destination, formattedDate } }) => {
   return (
     <div className="max-w-3xl mx-auto p-4 pt-10">
       <div className="py-4">
         <h1 className="text-3xl font-bold mb-2">Findseater</h1>
-        <IntroText origin={origin.name} destination={destination.name} />
+        <IntroText origin={origin.name} destination={destination.name} date={formattedDate} />
       </div>
       <TrainTable availability={availability} />
     </div>
@@ -35,12 +35,12 @@ export const getServerSideProps: GetServerSideProps = async (
     day: string
   }
 
+  const date = { year, month, day }
+
   const { locationLineUp, availability, serviceInfo } = await getData({
-    origin: origin,
-    destination: destination,
-    year: year,
-    month: month,
-    day: day,
+    origin,
+    destination,
+    date,
   })
 
   return {
@@ -51,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (
         destination,
         locationLineUp,
         serviceInfo,
+        date,
       }),
     },
   }

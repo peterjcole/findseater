@@ -1,16 +1,13 @@
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
 import type { AvailabilityResponse } from '../types/southeastern'
 import { uidToTsid } from './formatting'
+import type { DateObj } from '../types/internal'
 
 // import * as fs from 'fs'
 
-export async function getLocationLineUp({
-  origin,
-  destination,
-  year,
-  month,
-  day,
-}: GetLocationLineUpProps) {
+export async function getLocationLineUp({ origin, destination, date }: GetLocationLineUpProps) {
+  const { year, month, day } = date || {}
+
   const hasFullDate = year && month && day
 
   const realtimeTrainsRes = await fetch(
@@ -35,9 +32,11 @@ export async function getLocationLineUp({
 interface GetLocationLineUpProps {
   origin?: string
   destination?: string
-  year?: string
-  month?: string
-  day?: string
+  date?: {
+    year?: string
+    month?: string
+    day?: string
+  }
 }
 
 export const getServiceInfo = async ({ serviceUid, year, month, day }: GetServiceInfoProps) => {
@@ -67,19 +66,17 @@ export const getAllServiceInfo = async (
   locationLineUp: LocationLineUpResponse
 ): Promise<ServiceInfoResponse[]> => {
   return Promise.all(
-    locationLineUp.services.map(async ({ serviceUid, runDate }) => {
+    locationLineUp?.services?.map(async ({ serviceUid, runDate }) => {
       const [year, month, day] = runDate.split('-')
 
       return getServiceInfo({ serviceUid, year, month, day })
-    })
+    }) || []
   )
 }
 
 export async function getAvailability(locationLineUp: LocationLineUpResponse) {
   const serviceCodes =
     locationLineUp.services?.map((service) => uidToTsid(service.serviceUid, service.runDate)) || []
-
-  console.log(serviceCodes)
 
   const southeasternRes = await fetch(
     'https://api.southeasternrailway.co.uk/departure-boards/service-seating-availability',
@@ -99,13 +96,11 @@ export async function getAvailability(locationLineUp: LocationLineUpResponse) {
   return availability
 }
 
-export const getData = async ({ origin, destination, year, month, day }: getDataProps) => {
+export const getData = async ({ origin, destination, date }: getDataProps) => {
   const locationLineUp = await getLocationLineUp({
-    origin: origin,
-    destination: destination,
-    year: year,
-    month: month,
-    day: day,
+    origin,
+    destination,
+    date,
   })
 
   const [serviceInfo, availability] = await Promise.all([
@@ -121,7 +116,5 @@ export const getData = async ({ origin, destination, year, month, day }: getData
 interface getDataProps {
   origin?: string
   destination?: string
-  year?: string
-  month?: string
-  day?: string
+  date?: DateObj
 }

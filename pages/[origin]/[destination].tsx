@@ -7,12 +7,14 @@ import { TrainTable } from '../../components/TrainTable'
 import { mapTrains, trimAvailability } from '../../shared/mappers'
 import { IntroText } from '../../components/introText'
 
-const Destination: NextPage<Props> = ({ trains: { availability, origin, destination } }) => {
+const Destination: NextPage<Props> = ({
+  trains: { availability, origin, destination, formattedDate },
+}) => {
   return (
     <div className="max-w-3xl mx-auto p-4 pt-10">
       <div className="py-4">
         <h1 className="text-3xl font-bold mb-2">Findseater</h1>
-        <IntroText origin={origin.name} destination={destination.name} />
+        <IntroText origin={origin.name} destination={destination.name} date={formattedDate} />
       </div>
       <TrainTable availability={availability} />
     </div>

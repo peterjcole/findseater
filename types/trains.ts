@@ -5,6 +5,7 @@ export interface Trains {
   availability: Availability
   origin: LocationLineUpLocation
   destination: LocationLineUpLocation
+  formattedDate: string
 }
 
 export type Availability = TrainService[]

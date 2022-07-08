@@ -1,3 +1,7 @@
+import { DateObj } from '../types/internal'
+import format from 'date-fns/format'
+import parse from 'date-fns/parse'
+
 export const uidToTsid = (serviceUid: string, runDate: string) => {
   const numericalDate = runDate.replace(/-/g, '')
 
@@ -67,3 +71,14 @@ export const getTextColourClass = (loadingLevel: number | null | undefined) => {
 
 export const caseInsensitiveEquals = (first: string, second: string) =>
   first.localeCompare(second, undefined, { sensitivity: 'base' }) === 0
+
+export const formatRequestedDate = (date?: DateObj) => {
+  if (!date) {
+    return format(new Date(), 'do MMMM yyyy')
+  }
+
+  return format(
+    parse(`${date.year}-${date.month}-${date.day}`, 'yyyy-MM-dd', new Date()),
+    'do MMMM yyyy'
+  )
+}
