@@ -71,15 +71,21 @@ export const mapAvailability = (
 }
 export const trimAvailability = (
   availability: AvailabilityResponse,
-  origin: string | null | undefined,
-  destination: string | null | undefined
+  origin: string,
+  destination: string
 ) => {
   return availability.map((serviceAvailability) => {
     const { seatingAvailabilityAtLocations: locations } = serviceAvailability
 
     const trimmedLocations = locations.slice(
-      locations.findIndex((location) => location.stationCRS === origin),
-      locations.findIndex((location) => location.stationCRS === destination) + 1
+      locations.findIndex(
+        (location) =>
+          location.stationCRS.localeCompare(origin, undefined, { sensitivity: 'base' }) === 0
+      ),
+      locations.findIndex(
+        (location) =>
+          location.stationCRS.localeCompare(destination, undefined, { sensitivity: 'base' }) === 0
+      ) + 1
     )
 
     const numStationsVisited = trimmedLocations?.length
@@ -97,8 +103,8 @@ export const trimAvailability = (
 }
 export const mapTrains = (
   availability: AvailabilityForService[],
-  origin: string | string[] | undefined,
-  destination: string | string[] | undefined,
+  origin: string,
+  destination: string,
   locationLineUp: LocationLineUpResponse
 ) => ({
   availability: mapAvailability(
