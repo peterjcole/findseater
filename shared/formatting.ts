@@ -1,4 +1,4 @@
-import { DateObj } from '../types/internal'
+import type { DateObj } from '../types/internal'
 import format from 'date-fns/format'
 import parse from 'date-fns/parse'
 
