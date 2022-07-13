@@ -4,11 +4,12 @@ import type {
   SeatingAvailability,
 } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
-import type { Availability, Seating, Trains } from '../types/trains'
+import type { Availability, Seating, Trains, TrainService } from '../types/trains'
 import { caseInsensitiveEquals, formatRequestedDate, formatTime, tsidToUid } from './formatting'
 import parse from 'date-fns/parse'
 import compareAsc from 'date-fns/compareAsc'
 import type { DateObj } from '../types/internal'
+import { add } from 'date-fns'
 
 const mapSeatingAvailability = (
   seatingAvailability: SeatingAvailability[],
@@ -41,7 +42,7 @@ export const mapAvailability = (
   return availability
     .map((service) => {
       const matchedRttService = serviceInfo.find(
-        (rttService) => rttService.serviceUid === tsidToUid(service.tsid)
+        (rttService) => rttService?.serviceUid === tsidToUid(service.tsid)
       )
 
       const userOrigin = matchedRttService?.locations.find((location) =>
@@ -56,8 +57,8 @@ export const mapAvailability = (
 
       return {
         tsid: service.tsid,
-        uid: matchedRttService?.serviceUid,
-        runDate: matchedRttService?.runDate,
+        uid: matchedRttService?.serviceUid || null,
+        runDate: matchedRttService?.runDate || null,
         maxLoadingLevel,
         seating: mapSeatingAvailability(
           service.seatingAvailabilityAtLocations,
@@ -76,18 +77,24 @@ export const mapAvailability = (
       }
     })
     .sort((first, second) => {
-      const firstArrival = first.arrivalTime.realTime || first.arrivalTime.booked
-      const secondArrival = second.arrivalTime.realTime || second.arrivalTime.booked
-
-      if (!firstArrival || !secondArrival) {
+      if (!first || !second) {
         return 0
       }
-
-      return compareAsc(
-        parse(firstArrival, 'HH:mm', new Date()),
-        parse(secondArrival, 'HH:mm', new Date())
-      )
+      return compareAsc(getAdjustedDate(first), getAdjustedDate(second))
     })
+}
+
+const parseDate = (date: string | null | undefined) => {
+  return parse(date || '', 'HH:mm', new Date())
+}
+
+const getAdjustedDate = (service: TrainService) => {
+  const departure = parseDate(service.departureTime?.realTime || service.departureTime?.booked)
+  const arrival = parseDate(service.arrivalTime?.realTime || service.arrivalTime?.booked)
+
+  const arrivesNextDay = compareAsc(departure, arrival) === 1
+
+  return arrivesNextDay ? add(arrival, { days: 1 }) : arrival
 }
 
 export const trimAvailability = (
@@ -131,8 +138,8 @@ export const mapTrains = ({
     origin,
     destination
   ),
-  origin: locationLineUp.location,
-  destination: locationLineUp.filter.destination,
+  origin: locationLineUp?.location || null,
+  destination: locationLineUp?.filter?.destination || null,
   formattedDate: formatRequestedDate(date),
 })
 

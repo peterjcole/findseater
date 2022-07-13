@@ -69,8 +69,8 @@ export const getTextColourClass = (loadingLevel: number | null | undefined) => {
   return `text-red-800`
 }
 
-export const caseInsensitiveEquals = (first: string, second: string) =>
-  first.localeCompare(second, undefined, { sensitivity: 'base' }) === 0
+export const caseInsensitiveEquals = (first?: string, second?: string) =>
+  second && first?.localeCompare(second, undefined, { sensitivity: 'base' }) === 0
 
 export const formatRequestedDate = (date?: DateObj) => {
   if (!date) {
@@ -81,4 +81,17 @@ export const formatRequestedDate = (date?: DateObj) => {
     parse(`${date.year}-${date.month}-${date.day}`, 'yyyy-MM-dd', new Date()),
     'do MMMM yyyy'
   )
+}
+export const buildUrl = (
+  origin: string | undefined,
+  destination: string | undefined,
+  pickerDate: string | undefined
+) => {
+  if (!origin || !destination) {
+    return '/'
+  }
+
+  const urlDate = pickerDate && pickerDate.split('-').join('/')
+
+  return `/${origin}/${destination}${urlDate ? `/${urlDate}` : ''}`
 }

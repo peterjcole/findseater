@@ -22,7 +22,7 @@ export async function getLocationLineUp({ origin, destination, date }: GetLocati
     }
   )
 
-  const trains: LocationLineUpResponse = await realtimeTrainsRes.json()
+  const trains: LocationLineUpResponse = await realtimeTrainsRes.json().catch(() => ({}))
 
   // fs.writeFileSync('trains.json', JSON.stringify(trains))
 
@@ -50,7 +50,7 @@ export const getServiceInfo = async ({ serviceUid, year, month, day }: GetServic
     }
   )
 
-  const trains: ServiceInfoResponse = await realtimeTrainsRes.json()
+  const trains: ServiceInfoResponse = await realtimeTrainsRes.json().catch(() => {})
 
   return trains
 }
@@ -105,6 +105,7 @@ export const getData = async ({ origin, destination, date }: getDataProps) => {
 
   const [serviceInfo, availability] = await Promise.all([
     getAllServiceInfo(locationLineUp),
+    // [],
     getAvailability(locationLineUp),
   ])
 

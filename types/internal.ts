@@ -3,3 +3,9 @@ export interface DateObj {
   month: string
   day: string
 }
+
+export interface FilterStation {
+  name: string
+  crs: string
+  southeastern: boolean
+}

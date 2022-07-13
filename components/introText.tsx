@@ -15,9 +15,6 @@ export const IntroText = ({
   const router = useRouter()
   return (
     <div className="mb-4 flex gap-4 flex-wrap">
-      <span className="sr-only">
-        Upcoming trains from {origin} to {destination}, on {date}, sorted by arrival time:
-      </span>
       <span
         aria-hidden
         className="inline-block px-2 py-1 rounded-md outline outline-slate-200 outline-1 h-8"
