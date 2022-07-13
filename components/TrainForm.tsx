@@ -87,7 +87,7 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           onChange={destinationOnChange}
         />
       </fieldset>
-      <fieldset className="flex items-center flex-wrap gap-x-4 gap-y-2 p-2 rounded-lg border border-slate-200 w-64 shadow-sm w-fit">
+      <fieldset className="flex items-center flex-wrap gap-x-4 gap-y-2 p-2 rounded-lg border border-slate-200 shadow-sm w-fit">
         <label
           htmlFor="today-checkbox"
           className="w-max flex items-center flex-nowrap gap-x-2 p-2 rounded-md border border-slate-200 h-8"
