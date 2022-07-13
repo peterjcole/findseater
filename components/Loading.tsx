@@ -12,7 +12,7 @@ export const Loading: FunctionComponent<Props> = ({ service: { seating }, maxLoa
 
   return seating?.length ? (
     <figure aria-label={ariaLabel}>
-      <ol className="inline-flex gap-1 rounded-md min-h-[2.25rem]">
+      <ol className="inline-flex gap-1 rounded-md min-h-[2.25rem] after:content-[''] after:w-8">
         {seating.map(({ averageLoading, stationCRS, isMaxLoading }, index) => {
           return averageLoading && (isMaxLoading || index === 0) ? (
             <li
@@ -37,7 +37,7 @@ export const Loading: FunctionComponent<Props> = ({ service: { seating }, maxLoa
               )} flex items-center justify-center shadow`}
               key={stationCRS}
             >
-              <p className="rotate-90 text-xs">{stationCRS}</p>
+              <p className="-rotate-90 text-xs">{stationCRS}</p>
             </li>
           )
         })}

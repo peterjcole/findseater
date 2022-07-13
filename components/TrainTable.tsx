@@ -27,13 +27,13 @@ export const TrainTable = ({ availability }: { availability: Availability }) => 
             maxLoadingLevel,
           } = service
 
-          const className = `p-4 text-slate-700${
+          const className = `text-slate-700${
             index < availability.length - 1 ? ' border-b border-slate-100' : ''
           }`
 
           return (
             <tr key={tsid}>
-              <td {...{ className }}>
+              <td className={`${className} p-4`}>
                 <ServiceInfo
                   time={departureTime}
                   platform={departurePlatform}
@@ -41,10 +41,14 @@ export const TrainTable = ({ availability }: { availability: Availability }) => 
                   runDate={runDate}
                 />
               </td>
-              <td className={`${className} overflow-x-auto`}>
-                <Loading service={service} maxLoadingLevel={maxLoadingLevel} />
+              <td
+                className={`${className} relative after:content-[''] after:absolute after:inset-0 after:left-1/2 after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-white`}
+              >
+                <div className="py-4 px-1 overflow-x-auto">
+                  <Loading service={service} maxLoadingLevel={maxLoadingLevel} />
+                </div>
               </td>
-              <td {...{ className }}>
+              <td className={`${className} p-4`}>
                 <ServiceInfo time={arrivalTime} />
               </td>
             </tr>
