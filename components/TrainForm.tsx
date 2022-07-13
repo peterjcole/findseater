@@ -72,6 +72,9 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           className="inline-block px-2 py-1 rounded-md shadow bg-slate-100 h-8 hover:bg-slate-200"
           onClick={(e) => {
             e.preventDefault()
+            const oldOrigin = selectedOrigin
+            setSelectedOrigin(selectedDestination)
+            setSelectedDestination(oldOrigin)
             router.push(buildUrl(destination, origin, !isToday ? selectedDate : undefined))
           }}
         >
