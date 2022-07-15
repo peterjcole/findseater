@@ -5,7 +5,7 @@ import type {
 } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
 import type { Availability, Seating, Trains, TrainService } from '../types/trains'
-import { caseInsensitiveEquals, formatRequestedDate, formatTime, tsidToUid } from './formatting'
+import { caseInsensitiveEquals, formatTime, tsidToUid } from './formatting'
 import parse from 'date-fns/parse'
 import compareAsc from 'date-fns/compareAsc'
 import type { DateObj } from '../types/internal'
@@ -80,17 +80,38 @@ export const mapAvailability = (
       if (!first || !second) {
         return 0
       }
-      return compareAsc(getAdjustedDate(first), getAdjustedDate(second))
+      const firstDate = getAdjustedArrivalDate(first)
+      const secondDate = getAdjustedArrivalDate(first)
+
+      if (!firstDate || !secondDate) {
+        return 0
+      }
+
+      return compareAsc(firstDate, secondDate)
     })
 }
 
-const parseDate = (date: string | null | undefined) => {
-  return parse(date || '', 'HH:mm', new Date())
+const parseDate = (date: string | null | undefined, runDate: string | null | undefined) => {
+  if (!date || !runDate) {
+    return null
+  }
+
+  return parse(`${date} ${runDate}`, 'HH:mm yyyy-MM-dd', new Date())
 }
 
-const getAdjustedDate = (service: TrainService) => {
-  const departure = parseDate(service.departureTime?.realTime || service.departureTime?.booked)
-  const arrival = parseDate(service.arrivalTime?.realTime || service.arrivalTime?.booked)
+const getAdjustedArrivalDate = (service: TrainService) => {
+  const departure = parseDate(
+    service.departureTime?.realTime || service.departureTime?.booked,
+    service.runDate
+  )
+  const arrival = parseDate(
+    service.arrivalTime?.realTime || service.arrivalTime?.booked,
+    service.runDate
+  )
+
+  if (!departure || !arrival) {
+    return null
+  }
 
   const arrivesNextDay = compareAsc(departure, arrival) === 1
 
@@ -130,7 +151,6 @@ export const mapTrains = ({
   destination,
   locationLineUp,
   serviceInfo,
-  date,
 }: MapTrainsParams): Trains => ({
   availability: mapAvailability(
     trimAvailability(availability, origin as string, destination as string),
@@ -140,7 +160,6 @@ export const mapTrains = ({
   ),
   origin: locationLineUp?.location || null,
   destination: locationLineUp?.filter?.destination || null,
-  formattedDate: formatRequestedDate(date),
 })
 
 interface MapTrainsParams {

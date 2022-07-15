@@ -42,7 +42,6 @@ export const getServerSideProps: GetServerSideProps = async (
         destination,
         locationLineUp,
         serviceInfo,
-        date,
       }),
     },
   }
