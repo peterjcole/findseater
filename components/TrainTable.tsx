@@ -42,7 +42,7 @@ export const TrainTable = ({ availability }: { availability: Availability }) => 
                 />
               </td>
               <td
-                className={`${className} relative after:content-[''] after:absolute after:inset-0 after:left-1/2 after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-white`}
+                className={`${className} relative after:content-[''] after:absolute after:inset-0 after:left-[90%] after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-white`}
               >
                 <div className="py-4 px-1 overflow-x-auto">
                   <Loading service={service} maxLoadingLevel={maxLoadingLevel} />

@@ -974,7 +974,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Beckenham Junction',
     crs: 'BKJ',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Bedford',
@@ -2419,7 +2419,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Charing (Kent)',
     crs: 'CHG',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Charing Cross (Glasgow)',
@@ -4019,7 +4019,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Elmers End',
     crs: 'ELE',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Elmstead Woods',
@@ -5014,7 +5014,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Greenwich',
     crs: 'GNW',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Gretna Green',
@@ -5484,7 +5484,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Hayes (Kent)',
     crs: 'HYS',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Hayle',
@@ -6239,7 +6239,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Kearsney (Kent)',
     crs: 'KSN',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Keighley',
@@ -6819,7 +6819,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Lee (London)',
     crs: 'LEE',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Leeds',
@@ -6894,7 +6894,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Lewisham',
     crs: 'LEW',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Leyland',
@@ -7229,22 +7229,22 @@ export const stations: FilterStation[] = [
   {
     name: 'London Blackfriars',
     crs: 'BFR',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Bridge',
     crs: 'LBG',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Cannon Street',
     crs: 'CST',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Charing Cross',
     crs: 'CHX',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Euston',
@@ -7299,12 +7299,12 @@ export const stations: FilterStation[] = [
   {
     name: 'London St Pancras International',
     crs: 'STP',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Victoria',
     crs: 'VIC',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'London Waterloo',
@@ -7314,7 +7314,7 @@ export const stations: FilterStation[] = [
   {
     name: 'London Waterloo East',
     crs: 'WAE',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Long Buckby',
@@ -7624,7 +7624,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Marden (Kent)',
     crs: 'MRN',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Margate',
@@ -10304,7 +10304,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Shoreham (Kent)',
     crs: 'SEH',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Shoreham-by-Sea',
@@ -10754,7 +10754,7 @@ export const stations: FilterStation[] = [
   {
     name: 'St Johns (London)',
     crs: 'SAJ',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'St Keyne Wishing Well Halt',
@@ -11009,7 +11009,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Stratford International',
     crs: 'SFA',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Stratford-upon-Avon',
@@ -11064,7 +11064,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Strood (Kent)',
     crs: 'SOO',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Stroud (Gloucs)',
@@ -12709,7 +12709,7 @@ export const stations: FilterStation[] = [
   {
     name: 'Woolwich Arsenal',
     crs: 'WWA',
-    southeastern: false,
+    southeastern: true,
   },
   {
     name: 'Woolwich Dockyard',

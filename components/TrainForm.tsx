@@ -98,7 +98,7 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           Upcoming trains{' '}
           <input
             type="checkbox"
-            name="today-checkbox"
+            id="today-checkbox"
             className="w-5 h-5 rounded-md"
             checked={isToday}
             onChange={({ target: { checked } }) => {
@@ -118,7 +118,9 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           name="date-input"
           type="date"
           style={{ verticalAlign: 'bottom' }}
-          className="inline-block px-2 py-1 rounded-md h-8 ring-1 ring-slate-200 leading-8"
+          className={`inline-block px-2 py-1 rounded-md h-8 ring-1 ring-slate-200 leading-8 ${
+            isToday ? 'text-slate-300' : ''
+          }`}
           value={selectedDate}
           onChange={({ target: { value } }) => {
             setSelectedDate(value)
