@@ -65,7 +65,7 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
         <StationCombobox name="origin-station" value={selectedOrigin} onChange={originOnChange} />
         <button
           aria-label="Swap origin and destination"
-          className="bg-primary-5 inline-block px-1 rounded-md shadow h-7 hover:bg-primary-10 hover:drop-shadow-lg"
+          className="bg-primary-5 inline-block px-1 rounded-md shadow h-7 hover:bg-primary-10 hover:drop-shadow-lg active:bg-primary-50 "
           onClick={(e) => {
             e.preventDefault()
             const oldOrigin = selectedOrigin

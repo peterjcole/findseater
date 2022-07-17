@@ -35,6 +35,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     <div className="max-w-3xl mx-auto p-4 pt-10 text-slate-800">
       <Head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" href="/apple-icon-180.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link

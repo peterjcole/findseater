@@ -4,5 +4,5 @@
 
 html {
     @apply bg-background-100;
-    @apply accent-primary-5;
+    @apply accent-primary-100;
 }
