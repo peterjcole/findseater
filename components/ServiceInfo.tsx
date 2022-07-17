@@ -24,22 +24,6 @@ export const ServiceInfo: FunctionComponent<Props> = ({
     <p>Unknown</p>
   )
 
-  // const times = (
-  //   <>
-  //     {booked && (
-  //       <span className={!isOnTime ? 'line-through font-light text-xs' : 'font-semibold text-lg'}>
-  //         <time dateTime={booked}>{booked}</time>
-  //       </span>
-  //     )}{' '}
-  //     {!(booked === realTime) && realTime && (
-  //       <span className="font-semibold text-lg">
-  //         <time dateTime={realTime}>{realTime}</time>
-  //       </span>
-  //     )}
-  //     {!booked && }
-  //   </>
-  // )
-
   return (
     <div className="w-fit md:w-max">
       {!isOnTime && (

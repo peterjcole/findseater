@@ -4,10 +4,18 @@ import { Loading } from './Loading'
 
 export const TrainTable = ({ availability }: { availability: Availability }) => {
   if (!availability.length) {
-    return <h1>No trains found :(</h1>
+    return <h1 className="px-4">No trains found :(</h1>
   }
+
+  const smallTable =
+    Math.max(...availability.map((service) => service.seating?.length).filter(Boolean)) < 15
+
   return (
-    <table className="table-fixed w-full sm:w-auto border-collapse text-sm rounded-md shadow-lg">
+    <table
+      className={`table-fixed w-full border-collapse text-sm rounded-md shadow-lg ${
+        smallTable ? 'sm:w-auto' : ''
+      }`}
+    >
       <thead>
         <tr>
           <th className="border-b font-medium p-4 text-left w-24">Departure</th>
@@ -42,7 +50,7 @@ export const TrainTable = ({ availability }: { availability: Availability }) => 
                 />
               </td>
               <td
-                className={`${className} relative after:content-[''] after:absolute after:inset-0 after:left-[90%] after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-white`}
+                className={`${className} relative after:content-[''] after:absolute after:inset-0 after:left-[90%] after:bg-gradient-to-r after:from-transparent after:via-transparent after:to-background-100`}
               >
                 <div className="py-4 px-1 overflow-x-auto">
                   <Loading service={service} maxLoadingLevel={maxLoadingLevel} />

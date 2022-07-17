@@ -23,7 +23,7 @@ export const formatTime = (time: string | any[] | undefined) =>
 
 export const getBgColourClass = (loadingLevel: number | null | undefined) => {
   if (!loadingLevel) {
-    return ''
+    return 'bg-background-10'
   }
 
   if (loadingLevel < 40) {
@@ -42,7 +42,7 @@ export const getBgColourClass = (loadingLevel: number | null | undefined) => {
     return `bg-amber-100`
   }
 
-  return `bg-red-100`
+  return `bg-primary-5`
 }
 
 export const getTextColourClass = (loadingLevel: number | null | undefined) => {

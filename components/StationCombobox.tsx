@@ -21,7 +21,7 @@ export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, valu
         <div className="relative">
           <Combobox.Button as="div">
             <Combobox.Input
-              className="inline-block px-2 py-1 rounded-md h-8 border border-slate-200 w-64"
+              className="inline-block px-2 py-1 rounded-md h-8 border border-slate-200 w-64 bg-background-10"
               displayValue={(station: FilterStation) => station.name}
               onChange={(event) => setQuery(event.target.value)}
               onFocus={(event: any) => {
@@ -32,11 +32,13 @@ export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, valu
             />
           </Combobox.Button>
         </div>
-        <Combobox.Options className="z-10 absolute mt-2 py-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5  sm:text-sm bg-white overflow-x-auto max-h-96">
+        <Combobox.Options className="z-10 absolute mt-2 py-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5  sm:text-sm bg-background-10 overflow-x-auto max-h-96">
           {filteredStations.slice(0, 200).map((station) => (
             <Combobox.Option
               className={({ active }) =>
-                `p-2 bg-slate-50 mb-1 last:mb-0 hover: ${active ? 'bg-slate-200' : 'bg-slate-50'}`
+                `p-2 mb-1 last:mb-0 hover:bg-primary-5 ${
+                  active ? 'bg-primary-5' : 'bg-background-100'
+                }`
               }
               key={station.crs}
               value={station}

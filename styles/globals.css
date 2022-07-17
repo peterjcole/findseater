@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    @apply bg-background-100;
+    @apply accent-primary-5;
+}
