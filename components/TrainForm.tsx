@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { setCookie } from 'cookies-next'
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
@@ -12,21 +13,16 @@ function getStation(origin: string | null) {
 
 export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year, month, day }) => {
   const router = useRouter()
-
-  useEffect(() => {
-    if (!origin || !destination) {
-      router.push(buildUrl('CHX', 'HGS', undefined))
-    }
-  }, [origin, destination, router])
+  useSetStationsCookie(origin, destination)
 
   const urlDate = year && month && day ? `${year}-${month}-${day}` : undefined
 
   const [selectedOrigin, setSelectedOrigin] = useState<FilterStation>(
-    getStation(origin) || getStation('CHX') || stations[0]
+    getStation(origin) || stations[0]
   )
 
   const [selectedDestination, setSelectedDestination] = useState<FilterStation>(
-    getStation(destination) || getStation('HGS') || stations[0]
+    getStation(destination) || stations[0]
   )
 
   const [isToday, setIsToday] = useState<boolean>(!urlDate || false)
@@ -134,6 +130,14 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
       </fieldset>
     </form>
   )
+}
+
+function useSetStationsCookie(origin: string, destination: string) {
+  useEffect(() => {
+    setCookie('stations', `${origin}/${destination}`, {
+      maxAge: 3600 * 24 * 30 * 6 // ~6mo,
+    });
+  }, [origin, destination])
 }
 
 interface Props {
