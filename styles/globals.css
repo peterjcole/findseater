@@ -4,5 +4,23 @@
 
 html {
     @apply bg-background-100;
-    @apply accent-primary-100;
+    @apply accent-blue-900;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: theme(colors.primary.5) transparent;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+
+*::-webkit-scrollbar-thumb {
+    background-color: theme(colors.primary.5);
+    border-radius: 10px;
+    border: 2px solid theme(colors.background.100);
 }

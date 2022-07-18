@@ -17,9 +17,9 @@ export const TrainTable = ({ availability }: { availability: Availability }) => 
       }`}
     >
       <thead>
-        <tr>
+        <tr className="bg-background-50">
           <th className="border-b font-medium p-4 text-left w-24">Departure</th>
-          <th className="border-b font-medium p-4 text-left">Loading level</th>
+          <th className="border-b font-medium p-1 text-left">Loading level</th>
           <th className="border-b font-medium p-4 text-left w-24">Arrival</th>
         </tr>
       </thead>
