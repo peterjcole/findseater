@@ -1,7 +1,21 @@
+# findseater
+[![](public/apple-splash-2778-1284.jpg)](https://findseater.vercel.app)
+
+See upcoming and future UK trains, and a detailed view of Southeastern train loading levels.
+
+Try it out at **https://findseater.vercel.app**.
+
+## Development
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+### Requried environment variables
+```dotenv
+RTT_AUTH_KEY="<Realtime Trains API Key>"
+```
 
+You can get a RTT API key from https://api.rtt.io/.
+
+### Running locally
 First, run the development server:
 
 ```bash
