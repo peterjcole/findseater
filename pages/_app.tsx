@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-4 pt-10 text-slate-800">
+    <div className="max-w-3xl mx-auto p-4 pt-10 text-slate-800 mb-24">
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -185,7 +185,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           property="og:description"
           content="See a detailed view of loading information for southeastern trains"
         />
-        <meta property="og:image" content="/apple-splash-1334-750.jpg" />
+        <meta
+          property="og:image"
+          content="https://findseater.vercel.app/apple-splash-1334-750.jpg"
+        />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content="https://findseater.vercel.app" />
         <meta
@@ -196,7 +199,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           property="twitter:description"
           content="See a detailed view of loading information for southeastern trains"
         />
-        <meta property="twitter:image" content="/apple-splash-1334-750.jpg" />
+        <meta
+          property="twitter:image"
+          content="https://findseater.vercel.app/apple-splash-1334-750.jpg"
+        />
       </Head>
       <MainHeading />
       <TrainForm origin={origin} destination={destination} year={year} month={month} day={day} />
