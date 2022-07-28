@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [origin, destination, year, month, day] = router.query.slug || []
 
   return (
-    <div className="max-w-3xl mx-auto p-4 pt-10 text-slate-800 mb-24">
+    <div className="max-w-3xl mx-auto pt-10 text-slate-800 mb-24">
       <Head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -198,8 +198,10 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="https://findseater.vercel.app/apple-splash-1334-750.jpg"
         />
       </Head>
-      <MainHeading />
-      <TrainForm origin={origin} destination={destination} year={year} month={month} day={day} />
+      <div className="px-4">
+        <MainHeading />
+        <TrainForm origin={origin} destination={destination} year={year} month={month} day={day} />
+      </div>
       {pageLoading ? (
         <div className="flex items-center justify-center h-48">
           <Loader className="animate-spin" />
