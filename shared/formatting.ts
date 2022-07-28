@@ -1,8 +1,8 @@
-import type { DateObj } from '../types/internal'
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
-
 export const uidToTsid = (serviceUid: string, runDate: string) => {
+  if (!runDate || !serviceUid) {
+    return null
+  }
+
   const numericalDate = runDate.replace(/-/g, '')
 
   const numericalUid = `${serviceUid.slice(0, 1).charCodeAt(0)}${serviceUid.slice(1)}`
@@ -72,16 +72,6 @@ export const getTextColourClass = (loadingLevel: number | null | undefined) => {
 export const caseInsensitiveEquals = (first?: string, second?: string) =>
   second && first?.localeCompare(second, undefined, { sensitivity: 'base' }) === 0
 
-export const formatRequestedDate = (date?: DateObj) => {
-  if (!date) {
-    return format(new Date(), 'do MMMM yyyy')
-  }
-
-  return format(
-    parse(`${date.year}-${date.month}-${date.day}`, 'yyyy-MM-dd', new Date()),
-    'do MMMM yyyy'
-  )
-}
 export const buildUrl = (
   origin: string | undefined,
   destination: string | undefined,

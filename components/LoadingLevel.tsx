@@ -1,8 +1,14 @@
 import type { FunctionComponent } from 'react'
-import type { TrainService } from '../types/trains'
+import type { ServiceLoading } from '../types/trains'
 import { getBgColourClass, getTextColourClass } from '../shared/formatting'
 
-export const Loading: FunctionComponent<Props> = ({ service: { seating }, maxLoadingLevel }) => {
+export const LoadingLevel: FunctionComponent<Props> = ({ serviceLoading }) => {
+  if (!serviceLoading) {
+    return <>Unknown</>
+  }
+
+  const { seating, maxLoadingLevel } = serviceLoading
+
   const originLoadingLevel = seating?.[0]?.averageLoading
 
   const ariaLabel =
@@ -49,6 +55,5 @@ export const Loading: FunctionComponent<Props> = ({ service: { seating }, maxLoa
 }
 
 interface Props {
-  service: TrainService
-  maxLoadingLevel?: number | null
+  serviceLoading?: ServiceLoading | null
 }

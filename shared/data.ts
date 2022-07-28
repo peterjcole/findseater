@@ -1,6 +1,5 @@
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
 import type { AvailabilityResponse } from '../types/southeastern'
-import { uidToTsid } from './formatting'
 import type { DateObj } from '../types/internal'
 
 // import * as fs from 'fs'
@@ -74,23 +73,23 @@ export const getAllServiceInfo = async (
   )
 }
 
-export async function getAvailability(locationLineUp: LocationLineUpResponse) {
-  const serviceCodes =
-    locationLineUp.services?.map((service) => uidToTsid(service.serviceUid, service.runDate)) || []
-
+export async function getAvailability(trainServices: String[]) {
   const southeasternRes = await fetch(
     'https://api.southeasternrailway.co.uk/departure-boards/service-seating-availability',
     {
       method: 'POST',
       headers: {},
       body: JSON.stringify({
-        trainServices: serviceCodes,
+        trainServices,
       }),
     }
   )
 
-  const availability: AvailabilityResponse = await southeasternRes.json()
+  const availability: AvailabilityResponse = await southeasternRes.json().catch(() => {
+    return []
+  })
 
+  // return mockAvailability
   // fs.writeFileSync('availability.json', JSON.stringify(availability))
 
   return availability
@@ -103,15 +102,12 @@ export const getData = async ({ origin, destination, date }: getDataProps) => {
     date,
   })
 
-  const [serviceInfo, availability] = await Promise.all([
-    getAllServiceInfo(locationLineUp),
-    // [],
-    getAvailability(locationLineUp),
-  ])
+  const serviceInfo = await getAllServiceInfo(locationLineUp)
+  return { locationLineUp, serviceInfo }
 
   // fs.writeFileSync('serviceinfo.json', JSON.stringify(serviceInfo))
 
-  return { locationLineUp, availability, serviceInfo }
+  // return { locationLineUp: mockLocationLineUp, serviceInfo: mockServiceInfo }
 }
 
 interface getDataProps {
