@@ -1,70 +1,46 @@
-import type {
-  AvailabilityForService,
-  AvailabilityResponse,
-  SeatingAvailability,
-} from '../types/southeastern'
+import type { AvailabilityForService, AvailabilityResponse } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
-import type { Availability, Seating, Trains, TrainService } from '../types/trains'
-import { caseInsensitiveEquals, formatTime, tsidToUid } from './formatting'
+import type { ServiceLoading, Services, Trains, TrainService } from '../types/trains'
+import { caseInsensitiveEquals, formatTime, uidToTsid } from './formatting'
 import parse from 'date-fns/parse'
 import compareAsc from 'date-fns/compareAsc'
-import type { DateObj } from '../types/internal'
 import { add } from 'date-fns'
 
-const mapSeatingAvailability = (
-  seatingAvailability: SeatingAvailability[],
-  loadingLevels: number[],
-  maxLoadingLevel?: number | null
-): Seating[] => {
-  return seatingAvailability.map((availability, index) => ({
-    ...availability,
-    isMaxLoading:
-      availability.averageLoading === maxLoadingLevel &&
-      loadingLevels.findIndex((level) => level === availability.averageLoading) === index,
-  }))
-}
-
-const getLoadingLevels = (service: AvailabilityForService) => {
+export const getLoadingLevels = (service: AvailabilityForService): ServiceLoading => {
   const loadingLevels = service.seatingAvailabilityAtLocations.flatMap((location) =>
     location.averageLoading ? location.averageLoading : []
   )
 
   const maxLoadingLevel = loadingLevels?.length ? Math.max(...loadingLevels) : null
-  return { loadingLevels, maxLoadingLevel }
+
+  return {
+    seating: service.seatingAvailabilityAtLocations.map((seatingAvailability) => ({
+      ...seatingAvailability,
+      isMaxLoading: maxLoadingLevel === seatingAvailability.averageLoading,
+    })),
+    maxLoadingLevel,
+  }
 }
 
-export const mapAvailability = (
-  availability: AvailabilityResponse,
+export const mapSSRServices = (
   serviceInfo: ServiceInfoResponse[],
   origin: string,
   destination: string
-): Availability => {
-  return availability
+): Services => {
+  return serviceInfo
     .map((service) => {
-      const matchedRttService = serviceInfo.find(
-        (rttService) => rttService?.serviceUid === tsidToUid(service.tsid)
-      )
-
-      const userOrigin = matchedRttService?.locations.find((location) =>
+      const userOrigin = service?.locations.find((location) =>
         caseInsensitiveEquals(location.crs, origin)
       )
 
-      const userDestination = matchedRttService?.locations.find((location) =>
+      const userDestination = service?.locations.find((location) =>
         caseInsensitiveEquals(location.crs, destination)
       )
 
-      const { loadingLevels, maxLoadingLevel } = getLoadingLevels(service)
-
       return {
-        tsid: service.tsid,
-        uid: matchedRttService?.serviceUid || null,
-        runDate: matchedRttService?.runDate || null,
-        maxLoadingLevel,
-        seating: mapSeatingAvailability(
-          service.seatingAvailabilityAtLocations,
-          loadingLevels,
-          maxLoadingLevel
-        ),
+        tsid: uidToTsid(service?.serviceUid, service?.runDate),
+        uid: service?.serviceUid || null,
+        runDate: service?.runDate || null,
         departureTime: {
           booked: formatTime(userOrigin?.gbttBookedDeparture) || null,
           realTime: formatTime(userOrigin?.realtimeDeparture) || null,
@@ -81,7 +57,7 @@ export const mapAvailability = (
         return 0
       }
       const firstDate = getAdjustedArrivalDate(first)
-      const secondDate = getAdjustedArrivalDate(first)
+      const secondDate = getAdjustedArrivalDate(second)
 
       if (!firstDate || !secondDate) {
         return 0
@@ -145,28 +121,20 @@ export const trimAvailability = (
   })
 }
 
-export const mapTrains = ({
-  availability,
+export const mapSSRTrains = ({
   origin,
   destination,
   locationLineUp,
   serviceInfo,
-}: MapTrainsParams): Trains => ({
-  availability: mapAvailability(
-    trimAvailability(availability, origin as string, destination as string),
-    serviceInfo,
-    origin,
-    destination
-  ),
+}: MapSSRTrainsParams): Trains => ({
+  services: mapSSRServices(serviceInfo, origin, destination),
   origin: locationLineUp?.location || null,
   destination: locationLineUp?.filter?.destination || null,
 })
 
-interface MapTrainsParams {
-  availability: AvailabilityForService[]
+interface MapSSRTrainsParams {
   origin: string
   destination: string
   locationLineUp: LocationLineUpResponse
   serviceInfo: ServiceInfoResponse[]
-  date?: DateObj
 }

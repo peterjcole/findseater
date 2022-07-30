@@ -2,16 +2,25 @@ import type { SeatingAvailability } from './southeastern'
 import type { LocationDetail, LocationLineUpLocation } from './real-time-trains'
 
 export interface Trains {
-  availability: Availability
+  services: Services
   origin: LocationLineUpLocation
   destination: LocationLineUpLocation
 }
 
-export type Availability = TrainService[]
+export type Services = TrainService[]
 
 export interface Time {
   booked?: string | null
   realTime?: string | null
+}
+
+export type TrainLoading = {
+  [index: string]: ServiceLoading
+}
+
+export interface ServiceLoading {
+  maxLoadingLevel?: number | null
+  seating?: Seating[]
 }
 
 export interface Seating extends SeatingAvailability {
@@ -19,11 +28,9 @@ export interface Seating extends SeatingAvailability {
 }
 
 export interface TrainService {
-  tsid: string
+  tsid?: string | null
   uid?: string | null
   runDate?: string | null
-  maxLoadingLevel?: number | null
-  seating: Seating[]
   departureTime: Time
   arrivalTime: Time
   departurePlatform?: LocationDetail['platform'] | null
