@@ -6,6 +6,7 @@ import { stations } from '../fixtures/stations'
 import { StationCombobox } from './StationCombobox'
 import { ArrowRight } from 'react-feather'
 import { buildUrl } from '../shared/formatting'
+import { Button } from './Button'
 
 function getStation(origin: string | null) {
   return stations.find((station) => station.crs.toLowerCase() === origin?.toLowerCase())
@@ -63,10 +64,10 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           Origin station:
         </label>
         <StationCombobox name="origin-station" value={selectedOrigin} onChange={originOnChange} />
-        <button
+        <Button
+          className="px-1"
           aria-label="Swap origin and destination"
           type="button"
-          className="bg-primary-5 inline-block px-1 rounded-md shadow h-7 hover:bg-primary-10 hover:drop-shadow-lg active:bg-primary-50 "
           onClick={(e) => {
             e.preventDefault()
             const oldOrigin = selectedOrigin
@@ -81,8 +82,8 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
             )
           }}
         >
-          <ArrowRight size="24" />
-        </button>
+          <ArrowRight size="18" />
+        </Button>
 
         <label htmlFor="destination-station" className="sr-only">
           Destination station:

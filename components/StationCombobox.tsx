@@ -36,8 +36,8 @@ export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, valu
           {filteredStations.slice(0, 200).map((station) => (
             <Combobox.Option
               className={({ active }) =>
-                `p-2 mb-1 last:mb-0 hover:bg-primary-5 ${
-                  active ? 'bg-primary-5' : 'bg-background-100'
+                `p-2 mb-1 last:mb-0 hover:bg-primary-2 ${
+                  active ? 'bg-primary-2' : 'bg-background-100'
                 }`
               }
               key={station.crs}
