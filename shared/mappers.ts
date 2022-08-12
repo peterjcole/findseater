@@ -107,13 +107,6 @@ export const trimAvailability = (
       locations.findIndex((location) => caseInsensitiveEquals(location.stationCRS, destination)) + 1
     )
 
-    const numStationsVisited = trimmedLocations?.length
-
-    if (numStationsVisited >= 2) {
-      trimmedLocations[numStationsVisited - 1].averageLoading =
-        trimmedLocations[numStationsVisited - 2].averageLoading
-    }
-
     return {
       ...serviceAvailability,
       seatingAvailabilityAtLocations: trimmedLocations,
