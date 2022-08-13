@@ -22,6 +22,17 @@ const TrainPage: NextPage<Props> = ({ trains: { services, origin, destination } 
       .then((data) => {
         setTrainLoading(data)
       })
+
+    localStorage.setItem(
+      'recentStations',
+      JSON.stringify([
+        origin.crs,
+        destination.crs,
+        ...JSON.parse(localStorage.getItem('recentStations') || '[]').filter(
+          (crs: string) => crs !== origin.crs && crs !== destination.crs
+        ),
+      ])
+    )
   }, [services, origin.crs, destination.crs])
 
   return <TrainTable services={services} trainLoading={trainLoading} />
