@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { Loader } from 'react-feather'
 import { TrainForm } from '../components/TrainForm'
 import { MainHeading } from '../components/MainHeading'
+import Script from 'next/script'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
@@ -209,6 +210,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       ) : (
         <Component {...pageProps} />
       )}
+      <Script
+        strategy="afterInteractive"
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "f28356878ead47b0a2ce3d509d0739b1"}'
+      />
     </div>
   )
 }
