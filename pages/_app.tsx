@@ -170,6 +170,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="See a detailed view of loading information for southeastern trains"
         />
+        <meta name="theme-color" content="#FDF8F2" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://findseater.vercel.app/" />
         <meta

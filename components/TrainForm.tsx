@@ -60,10 +60,12 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
         Upcoming trains from {origin} to {destination}, on {urlDate}, sorted by arrival time:
       </span>
       <fieldset className="inline-flex w-fit items-center gap-x-4 gap-y-2 p-2 rounded-lg border border-slate-200 shadow-sm flex-wrap">
-        <label htmlFor="origin-station" className="sr-only">
-          Origin station:
-        </label>
-        <StationCombobox name="origin-station" value={selectedOrigin} onChange={originOnChange} />
+        <StationCombobox
+          ariaLabel="Select an origin station"
+          name="origin-station"
+          value={selectedOrigin}
+          onChange={originOnChange}
+        />
         <Button
           className="px-1"
           aria-label="Swap origin and destination"
@@ -84,11 +86,8 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
         >
           <ArrowRight size="18" />
         </Button>
-
-        <label htmlFor="destination-station" className="sr-only">
-          Destination station:
-        </label>
         <StationCombobox
+          ariaLabel="Select a destination station"
           name="destination-station"
           value={selectedDestination}
           onChange={destinationOnChange}
@@ -118,6 +117,7 @@ export const TrainForm: FunctionComponent<Props> = ({ origin, destination, year,
           />
         </label>
         <input
+          aria-label="Select a date"
           disabled={isToday}
           name="date-input"
           type="date"

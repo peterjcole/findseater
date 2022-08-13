@@ -11,7 +11,7 @@ export const TrainTable = ({
   trainLoading: TrainLoading | null
 }) => {
   if (!services.length) {
-    return <h1 className="px-4">No trains found :(</h1>
+    return <h1 className="px-6">No trains found :(</h1>
   }
 
   return (

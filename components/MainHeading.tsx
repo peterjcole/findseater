@@ -12,7 +12,14 @@ export const MainHeading = () => {
         <Link href="/" className="relative">
           <a>
             <span className="sr-only">Findseater</span>
-            <Image alt="" src="/logo.svg" layout="fixed" height="132" width="132" />
+            <Image
+              priority={true}
+              src="/logo.svg"
+              layout="fixed"
+              height="132"
+              width="132"
+              alt="findseater"
+            />
           </a>
         </Link>
       </h1>

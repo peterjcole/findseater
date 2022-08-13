@@ -3,7 +3,7 @@ import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
 import { Combobox } from '@headlessui/react'
 
-export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, value }) => {
+export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, value, ariaLabel }) => {
   const [query, setQuery] = useState<string>('')
 
   const filteredStations =
@@ -20,6 +20,7 @@ export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, valu
       <div className="relative inline-block">
         <div className="relative">
           <Combobox.Button as="div">
+            <Combobox.Label className="sr-only">{ariaLabel}</Combobox.Label>
             <Combobox.Input
               className="inline-block px-2 py-1 rounded-md h-8 border border-slate-200 w-64 bg-background-10"
               displayValue={(station: FilterStation) => station.name}
@@ -63,4 +64,5 @@ interface Props {
   name: string
   onChange: (station: FilterStation) => any
   value: FilterStation
+  ariaLabel: string
 }
