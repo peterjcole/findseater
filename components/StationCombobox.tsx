@@ -3,7 +3,12 @@ import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
 import { Combobox } from '@headlessui/react'
 
-export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, value, ariaLabel }) => {
+export const StationCombobox: FunctionComponent<StationComboboxProps> = ({
+  name,
+  onChange,
+  value,
+  ariaLabel,
+}) => {
   const [query, setQuery] = useState<string>('')
   const [recentStations, setRecentStations] = useState<FilterStation[]>([])
 
@@ -54,26 +59,42 @@ export const StationCombobox: FunctionComponent<Props> = ({ name, onChange, valu
             />
           </Combobox.Button>
         </div>
-        <Combobox.Options className="z-10 absolute mt-2 py-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5  sm:text-sm bg-background-10 overflow-x-auto max-h-96">
-          {filteredRecentStations.map((station) => (
-            <ComboOption station={station} key={station.crs} />
-          ))}
-          {filteredStations.slice(0, 200).map((station) => (
-            <ComboOption station={station} key={station.crs} />
-          ))}
+        <Combobox.Options className="z-10 absolute mt-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5  sm:text-sm bg-background-10 overflow-x-auto max-h-96">
+          <div aria-label="Recent stations" className="border-b-4 border-primary-3">
+            {filteredRecentStations.map((station) => (
+              <ComboOption station={station} key={station.crs} backgroundColor="bg-primary-1" />
+            ))}
+          </div>
+          <div aria-label="All stations">
+            {filteredStations.slice(0, 200).map((station) => (
+              <ComboOption
+                station={station}
+                key={station.crs}
+                backgroundColor={`bg-background-100 odd:bg-background-50`}
+              />
+            ))}
+          </div>
         </Combobox.Options>
       </div>
     </Combobox>
   )
 }
 
-const ComboOption = ({ station }: { station: FilterStation }) => (
+const ComboOption: FunctionComponent<ComboOptionProps> = ({
+  station,
+  className,
+  backgroundColor,
+  ...props
+}) => (
   <Combobox.Option
     className={({ active }) =>
-      `p-2 mb-1 last:mb-0 hover:bg-primary-2 ${active ? 'bg-primary-2' : 'bg-background-100'}`
+      `p-2 mb-1 last:mb-0 hover:bg-primary-2 ${active ? 'bg-primary-2' : backgroundColor} ${
+        className ? className : ''
+      }`
     }
     value={station}
     key={station.crs}
+    {...props}
   >
     <span>
       {station.name} ({station.crs})
@@ -82,9 +103,14 @@ const ComboOption = ({ station }: { station: FilterStation }) => (
   </Combobox.Option>
 )
 
-interface Props {
+interface StationComboboxProps {
   name: string
   onChange: (station: FilterStation) => any
   value: FilterStation
   ariaLabel: string
+}
+
+interface ComboOptionProps extends React.ComponentPropsWithoutRef<'li'> {
+  backgroundColor: string
+  station: FilterStation
 }
