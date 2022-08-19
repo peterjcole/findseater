@@ -59,21 +59,25 @@ export const StationCombobox: FunctionComponent<StationComboboxProps> = ({
             />
           </Combobox.Button>
         </div>
-        <Combobox.Options className="z-10 absolute mt-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5  sm:text-sm bg-background-10 overflow-x-auto max-h-96">
-          <div aria-label="Recent stations" className="border-b-4 border-primary-3">
-            {filteredRecentStations.map((station) => (
-              <ComboOption station={station} key={station.crs} backgroundColor="bg-primary-1" />
-            ))}
-          </div>
-          <div aria-label="All stations">
-            {filteredStations.slice(0, 200).map((station) => (
-              <ComboOption
-                station={station}
-                key={station.crs}
-                backgroundColor={`bg-background-100 odd:bg-background-50`}
-              />
-            ))}
-          </div>
+        <Combobox.Options className="z-10 absolute mt-2 rounded-md max-w-max text-base shadow-lg ring-1 ring-black ring-opacity-5 sm:text-sm bg-background-10 overflow-x-auto max-h-96">
+          <li>
+            {!!filteredRecentStations.length && (
+              <ul aria-label="Recent stations" className="border-b-4 border-primary-3">
+                {filteredRecentStations.map((station) => (
+                  <ComboOption station={station} key={station.crs} backgroundColor="bg-primary-1" />
+                ))}
+              </ul>
+            )}
+            <ul aria-label="All stations">
+              {filteredStations.slice(0, 200).map((station) => (
+                <ComboOption
+                  station={station}
+                  key={station.crs}
+                  backgroundColor={`bg-background-100 odd:bg-background-50`}
+                />
+              ))}
+            </ul>
+          </li>
         </Combobox.Options>
       </div>
     </Combobox>
