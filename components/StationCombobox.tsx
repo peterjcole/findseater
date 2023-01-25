@@ -1,4 +1,5 @@
-import { FunctionComponent, useCallback, useEffect, useState } from 'react'
+import type { FunctionComponent } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
 import { Combobox } from '@headlessui/react'

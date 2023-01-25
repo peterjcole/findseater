@@ -1,6 +1,6 @@
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
-import type { AvailabilityResponse } from '../types/southeastern'
 import type { DateObj } from '../types/internal'
+import { mapSSRTrains } from './mappers'
 
 // import * as fs from 'fs'
 
@@ -49,7 +49,7 @@ export const getServiceInfo = async ({ serviceUid, year, month, day }: GetServic
     }
   )
 
-  const trains: ServiceInfoResponse = await realtimeTrainsRes.json().catch(() => {})
+  const trains: ServiceInfoResponse = await realtimeTrainsRes.json()
 
   return trains
 }
@@ -72,30 +72,7 @@ export const getAllServiceInfo = async (
     }) || []
   )
 }
-
-export async function getAvailability(trainServices: String[]) {
-  const southeasternRes = await fetch(
-    'https://api.southeasternrailway.co.uk/departure-boards/service-seating-availability',
-    {
-      method: 'POST',
-      headers: {},
-      body: JSON.stringify({
-        trainServices,
-      }),
-    }
-  )
-
-  const availability: AvailabilityResponse = await southeasternRes.json().catch(() => {
-    return []
-  })
-
-  // return mockAvailability
-  // fs.writeFileSync('availability.json', JSON.stringify(availability))
-
-  return availability
-}
-
-export const getData = async ({ origin, destination, date }: getDataProps) => {
+export const getTrains = async ({ origin, destination, date }: GetTrainsProps) => {
   const locationLineUp = await getLocationLineUp({
     origin,
     destination,
@@ -103,15 +80,21 @@ export const getData = async ({ origin, destination, date }: getDataProps) => {
   })
 
   const serviceInfo = await getAllServiceInfo(locationLineUp)
-  return { locationLineUp, serviceInfo }
+
+  return mapSSRTrains({
+    origin,
+    destination,
+    locationLineUp,
+    serviceInfo,
+  })
 
   // fs.writeFileSync('serviceinfo.json', JSON.stringify(serviceInfo))
 
   // return { locationLineUp: mockLocationLineUp, serviceInfo: mockServiceInfo }
 }
 
-interface getDataProps {
-  origin?: string
-  destination?: string
+interface GetTrainsProps {
+  origin: string
+  destination: string
   date?: DateObj
 }

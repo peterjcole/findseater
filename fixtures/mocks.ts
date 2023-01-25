@@ -1,5 +1,6 @@
 import type { AvailabilityResponse } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
+import type { HuxleyDepartureResponse } from '../types/huxley'
 
 export const mockAvailability: AvailabilityResponse = [
   {
@@ -3161,5 +3162,2791 @@ export const mockServiceInfo: ServiceInfoResponse[] = [
     ],
     realtimeActivated: true,
     runningIdentity: '1J52',
+  },
+]
+
+export const mockHuxleyResponse: HuxleyDepartureResponse[] = [
+  {
+    previousCallingPoints: null,
+    subsequentCallingPoints: [
+      {
+        callingPoint: [
+          {
+            locationName: 'London Waterloo East',
+            crs: 'WAE',
+            st: '18:02',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 46,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'London Bridge',
+            crs: 'LBG',
+            st: '18:06',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 67,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Sevenoaks',
+            crs: 'SEV',
+            st: '18:31',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 68,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Tonbridge',
+            crs: 'TON',
+            st: '18:41',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 49,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Paddock Wood',
+            crs: 'PDW',
+            st: '18:48',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 39,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Marden',
+            crs: 'MRN',
+            st: '18:54',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 32,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Staplehurst',
+            crs: 'SPU',
+            st: '18:58',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 22,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Headcorn',
+            crs: 'HCN',
+            st: '19:04',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 14,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Pluckley',
+            crs: 'PLC',
+            st: '19:11',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 12,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Ashford International',
+            crs: 'AFK',
+            st: '19:19',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 13,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Westenhanger',
+            crs: 'WHA',
+            st: '19:29',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 12,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Sandling',
+            crs: 'SDG',
+            st: '19:32',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 11,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Folkestone West',
+            crs: 'FKW',
+            st: '19:37',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 9,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Folkestone Central',
+            crs: 'FKC',
+            st: '19:39',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 6,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Dover Priory',
+            crs: 'DVP',
+            st: '19:50',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 5,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Martin Mill',
+            crs: 'MTM',
+            st: '20:00',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 7,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Walmer',
+            crs: 'WAM',
+            st: '20:04',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 6,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Deal',
+            crs: 'DEA',
+            st: '20:08',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 5,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+          {
+            locationName: 'Sandwich',
+            crs: 'SDW',
+            st: '20:15',
+            et: 'On time',
+            at: null,
+            isCancelled: false,
+            length: 12,
+            detachFront: false,
+            formation: {
+              avgLoading: 6,
+              avgLoadingSpecified: true,
+              coaches: [
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'A4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'B4',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C1',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Standard',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C2',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 1,
+                    value: 'Accessible',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C3',
+                },
+                {
+                  coachClass: 'Standard',
+                  toilet: {
+                    status: 0,
+                    value: 'None',
+                  },
+                  loading: 0,
+                  loadingSpecified: false,
+                  number: 'C4',
+                },
+              ],
+            },
+            adhocAlerts: null,
+          },
+        ],
+        serviceType: 0,
+        serviceChangeRequired: false,
+        assocIsCancelled: false,
+      },
+    ],
+    formation: {
+      avgLoading: 56,
+      avgLoadingSpecified: true,
+      coaches: [
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'A1',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Standard',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'A2',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Accessible',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'A3',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'A4',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'B1',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Standard',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'B2',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Accessible',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'B3',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'B4',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'C1',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Standard',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'C2',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 1,
+            value: 'Accessible',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'C3',
+        },
+        {
+          coachClass: 'Standard',
+          toilet: {
+            status: 0,
+            value: 'None',
+          },
+          loading: 0,
+          loadingSpecified: false,
+          number: 'C4',
+        },
+      ],
+    },
+    origin: [
+      {
+        locationName: 'London Charing Cross',
+        crs: 'CHX',
+        via: null,
+        futureChangeTo: null,
+        assocIsCancelled: false,
+      },
+    ],
+    destination: [
+      {
+        locationName: 'Sandwich',
+        crs: 'SDW',
+        via: null,
+        futureChangeTo: null,
+        assocIsCancelled: false,
+      },
+    ],
+    currentOrigins: null,
+    currentDestinations: null,
+    rsid: 'SE905600',
+    serviceIdPercentEncoded: '219167CHRX____',
+    serviceIdGuid: '32313931-0000-3637-4348-52585f5f5f5f',
+    serviceIdUrlSafe: 'MjE5MTY3Q0hSWF9fX18',
+    sta: null,
+    eta: null,
+    std: '17:59',
+    etd: 'On time',
+    platform: null,
+    operator: 'Southeastern',
+    operatorCode: 'SE',
+    isCircularRoute: false,
+    isCancelled: false,
+    filterLocationCancelled: false,
+    serviceType: 0,
+    length: 12,
+    detachFront: false,
+    isReverseFormation: false,
+    cancelReason: null,
+    delayReason: null,
+    serviceID: '219167CHRX____',
+    adhocAlerts: null,
   },
 ]

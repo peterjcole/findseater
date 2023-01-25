@@ -2,9 +2,8 @@ import type { GetServerSideProps, NextPage } from 'next'
 import type { GetServerSidePropsContext } from 'next/types'
 import { TrainTable } from '../components/TrainTable'
 import type { TrainLoading, Trains } from '../types/trains'
-import { getData } from '../shared/data'
-import { mapSSRTrains } from '../shared/mappers'
 import { useEffect, useState } from 'react'
+import { getTrains } from '../shared/data'
 
 const TrainPage: NextPage<Props> = ({ trains: { services, origin, destination } }) => {
   const [trainLoading, setTrainLoading] = useState<TrainLoading | null>(null)
@@ -49,22 +48,15 @@ export const getServerSideProps: GetServerSideProps = async (
 ) => {
   const [origin, destination, year, month, day] = context.query.slug || []
 
-  const date = { year, month, day }
-
-  const { locationLineUp, serviceInfo } = await getData({
+  const trains = await getTrains({
     origin,
     destination,
-    date,
+    date: { year, month, day },
   })
 
   return {
     props: {
-      trains: mapSSRTrains({
-        origin,
-        destination,
-        locationLineUp,
-        serviceInfo,
-      }),
+      trains,
     },
   }
 }
