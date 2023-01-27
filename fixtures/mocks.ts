@@ -1,6 +1,6 @@
 import type { AvailabilityResponse } from '../types/southeastern'
 import type { LocationLineUpResponse, ServiceInfoResponse } from '../types/real-time-trains'
-import type { HuxleyDepartureResponse } from '../types/huxley'
+import type { HuxleyService } from '../types/huxley'
 
 export const mockAvailability: AvailabilityResponse = [
   {
@@ -3165,7 +3165,7 @@ export const mockServiceInfo: ServiceInfoResponse[] = [
   },
 ]
 
-export const mockHuxleyResponse: HuxleyDepartureResponse[] = [
+export const mockHuxleyResponse: HuxleyService[] = [
   {
     previousCallingPoints: null,
     subsequentCallingPoints: [

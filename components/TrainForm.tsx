@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import { setCookie } from 'cookies-next'
-import { FunctionComponent, useCallback, useEffect, useState } from 'react'
+import type { FunctionComponent } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
 import { StationCombobox } from './StationCombobox'

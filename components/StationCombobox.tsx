@@ -1,4 +1,4 @@
-import type { FunctionComponent } from 'react'
+import type { FocusEventHandler, FunctionComponent } from 'react'
 import { useCallback, useEffect, useState } from 'react'
 import type { FilterStation } from '../types/internal'
 import { stations } from '../fixtures/stations'
@@ -42,6 +42,12 @@ export const StationCombobox: FunctionComponent<StationComboboxProps> = ({
             (station.crs.toLowerCase() + station.name.toLowerCase()).includes(query.toLowerCase())
         )
 
+  const handleFocus: FocusEventHandler<HTMLInputElement> = (event) => {
+    requestAnimationFrame(() => {
+      event.target.setSelectionRange(0, event.target.value.length)
+    })
+  }
+
   return (
     <Combobox name={name} value={value} onChange={changeHandler}>
       <div className="relative inline-block">
@@ -52,11 +58,7 @@ export const StationCombobox: FunctionComponent<StationComboboxProps> = ({
               className="inline-block px-2 py-1 rounded-md h-8 border border-slate-200 w-56 bg-background-10"
               displayValue={(station: FilterStation) => station.name}
               onChange={(event) => setQuery(event.target.value)}
-              onFocus={(event: any) => {
-                requestAnimationFrame(() => {
-                  event.target.setSelectionRange(0, event.target.value.length)
-                })
-              }}
+              onFocus={handleFocus}
             />
           </Combobox.Button>
         </div>
@@ -110,7 +112,7 @@ const ComboOption: FunctionComponent<ComboOptionProps> = ({
 
 interface StationComboboxProps {
   name: string
-  onChange: (station: FilterStation) => any
+  onChange: (station: FilterStation) => void
   value: FilterStation
   ariaLabel: string
 }
