@@ -47,30 +47,49 @@ export const mapDepartures = (
   data: HuxleyService[],
   destinationCrs: string
 ): DeparturesApiResponse =>
-  data.map(({ destination, etd, origin, platform, std, subsequentCallingPoints, formation }) => {
-    const { st, et } = getDestination(subsequentCallingPoints, destinationCrs) || {
-      st: null,
-      et: null,
-    }
-
-    const destinationSta = st
-    const destinationEta = et === 'On time' ? st : et
-
-    return {
+  data.map(
+    ({
+      destination,
+      etd,
+      origin,
       platform,
       std,
-      etd,
-      destinationEta,
-      destinationSta,
-      origin: mapDeparturesLocation(origin[0]),
-      destination: mapDeparturesLocation(destination[0]),
-      formation: mapDeparturesFormation(formation),
+      subsequentCallingPoints,
+      formation,
+      length,
+      serviceIdUrlSafe,
+    }) => {
+      const { st, et } = getDestination(subsequentCallingPoints, destinationCrs) || {
+        st: null,
+        et: null,
+      }
+
+      const destinationSta = st
+      const destinationEta = et === 'On time' ? st : et
+
+      const etdTime = etd === 'On time' ? std : etd
+
+      return {
+        id: serviceIdUrlSafe,
+        platform,
+        std,
+        etd: etdTime,
+        destinationEta,
+        destinationSta,
+        origin: mapDeparturesLocation(origin[0]),
+        destination: mapDeparturesLocation(destination[0]),
+        formation: mapDeparturesFormation(formation, length),
+      }
     }
-  })
+  )
 
-const mapDeparturesLocation = ({ locationName }: HuxleyLocation) => ({ locationName })
+const mapDeparturesLocation = ({ locationName }: HuxleyLocation) => ({ name: locationName })
 
-const mapDeparturesFormation = ({ avgLoading, avgLoadingSpecified }: HuxleyFormation) => ({
+const mapDeparturesFormation = (
+  { avgLoading, avgLoadingSpecified }: HuxleyFormation,
+  length: number
+) => ({
+  numCoaches: length,
   avgLoading: avgLoadingSpecified ? avgLoading : null,
 })
 

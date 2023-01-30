@@ -84,7 +84,7 @@ export interface HuxleyToilet {
 }
 
 export interface HuxleyLocation {
-  locationName: string
+  locationName: string | null
   crs: string | null
   via: string | null
   futureChangeTo: string | null
